@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="style.css">
+  <title>Login</title>
+</head>
+<body>
+  <div class="main">
+    <div class="section">
+      <div class="above">
+        <h1 class="above-title">𝓣𝓱𝓪𝓷𝓴𝓼 𝓬𝓪𝓻𝓭 𝓼𝓸𝓬𝓲𝓪𝓵𝓼</h1>
+        <p class="above-text">𝓙𝓸𝓲𝓷 𝓽𝓱𝓮 𝔀𝓸𝓻𝓵𝓭'𝓼 𝓵𝓪𝓻𝓰𝓮𝓼𝓽 𝓬𝓸𝓶𝓶𝓾𝓷𝓲𝓽𝔂</p>
+
+        <div class="eyes">
+          <div class="eye">
+            <div class="ball"></div>
+          </div>
+
+          <div class="eye">
+            <div class="ball"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="below">
+        <%= form_with scope: :session, class: 'input', url: login_path do |f| %>
+          <% flash.each do |message_type, message| %>
+            <div class="alert alert-<%= message_type %>"><%= message %></div>
+          <% end %>
+          <div class="input-1">
+            <%= f.email_field :email, class: 'below-text', placeholder: 'Enter Your Email' %>
+            <%= f.password_field :password, class: 'below-pass', placeholder: 'Password' %>
+          </div>
+
+          <div class="checkbox">
+            <%= f.check_box :remember_me, id: 'checkbox' %>
+            <label for="checkbox">Remember for 30 days</label>
+          </div>
+
+          <div class="submit">
+            <%= f.submit 'Sign in', class: 'login' %>
+            <%= f.submit 'Create New Account', class: 'create' %>
+	    
+	          <%= link_to "Forgot Password", '#', class: 'forgot' %>
+
+            <span class="span-checkbox">OR</span>
+          </div>
+
+          <div class="icons">
+            <%= image_tag("icons8-facebook-circled.svg", width: '30px') %>
+            <%= image_tag("icons8-github.svg", width: '30px') %>
+            <%= image_tag("icons8-google.svg", width: '30px') %>
+          </div>
+
+          <div class="below-text-hide">
+            <p>By clicking button above, you agree to our <a href="#">terms of use</a> and <a href="#">privacy policies</a></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var balls = document.getElementsByClassName("ball")
+
+    document.onmousemove = () => {
+      var x = event.clientX * 100 / window.innerWidth + '%'
+      var y = event.clientY * 100 / window.innerHeight + '%'
+
+      for(var i = 0; i < 2; i++){
+        balls[i].style.left = x
+
+        balls[i].style.top = y
+
+        balls[i].style.transform = 'translate(-'+x+', -'+y+')'
+      }
+    }
+  </script>
+</body>
+</html>
