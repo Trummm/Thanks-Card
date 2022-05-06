@@ -11,7 +11,7 @@
 <body>
   <div class="main">
     <div class="section">
-      <div class="above">
+      <div class="above2">
         <h1 class="above-title">𝓣𝓱𝓪𝓷𝓴𝓼 𝓬𝓪𝓻𝓭 𝓼𝓸𝓬𝓲𝓪𝓵𝓼</h1>
         <p class="above-text">𝓙𝓸𝓲𝓷 𝓽𝓱𝓮 𝔀𝓸𝓻𝓵𝓭'𝓼 𝓵𝓪𝓻𝓰𝓮𝓼𝓽 𝓬𝓸𝓶𝓶𝓾𝓷𝓲𝓽𝔂</p>
 
@@ -28,37 +28,16 @@
       </div>
 
       <div class="below">
-        <%= form_with scope: :session, class: 'input', url: login_path do |f| %>
+        <%= form_with scope: :password_reset, class: 'input', url: password_resets_path do |f| %>
           <% flash.each do |message_type, message| %>
             <div class="alert alert-<%= message_type %>"><%= message %></div>
           <% end %>
           <div class="input-1">
             <%= f.email_field :email, class: 'below-text', placeholder: 'Enter Your Email' %>
-            <%= f.password_field :password, class: 'below-pass', placeholder: 'Password' %>
           </div>
 
-          <div class="checkbox">
-            <%= f.check_box :remember_me, id: 'checkbox' %>
-            <label for="checkbox">Remember for 30 days</label>
-          </div>
-
-          <div class="submit">
-            <%= f.submit 'Sign in', class: 'login' %>
-            <%= f.submit 'Create New Account', class: 'create' %>
-	    
-	          <%= link_to "Forgot Password", new_password_reset_path , class: 'forgot' %>
-
-            <span class="span-checkbox">OR</span>
-          </div>
-
-          <div class="icons">
-            <%= image_tag("icons8-facebook-circled.svg", width: '30px') %>
-            <%= image_tag("icons8-github.svg", width: '30px') %>
-            <%= image_tag("icons8-google.svg", width: '30px') %>
-          </div>
-
-          <div class="below-text-hide">
-            <p>By clicking button above, you agree to our <a href="#">terms of use</a> and <a href="#">privacy policies</a></p>
+          <div class="submit2">
+            <%= f.submit 'Send', class: 'login' %>
           </div>
         <% end %>
       </div>
