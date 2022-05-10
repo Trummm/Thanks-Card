@@ -4,8 +4,11 @@ Rails.application.routes.draw do
   get    '/login',  to: 'sessions#new'
   post   '/login',  to: 'sessions#create'
   get    '/logout', to: 'sessions#destroy'
+  delete '/logout', to: 'sessions#destroy'
 
   resources :password_resets, only: %i[new create edit update]
+  
   resources :users, only: %i[index new show edit]
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  get '/logout', to: 'sessions#destroy'
 end
