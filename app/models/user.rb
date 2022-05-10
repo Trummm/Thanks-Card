@@ -1,13 +1,16 @@
 class User < ApplicationRecord
-  attr_accessor :remember_token, :activation_token, :reset_token
+  attr_accessor :remember_token, :reset_token
 
   has_secure_password
 
-  def User.digest(string)
-    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
-    BCrypt::Engine.cost
-    
-    BCrypt::Password.create(string, cost: cost)
+  class << self
+    def digest(string)
+      cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+      BCrypt::Password.create(string, cost: cost)
+    end
+    def new_token
+      SecureRandom.urlsafe_base64
+    end
   end
 
   def create_reset_digest
@@ -19,13 +22,4 @@ class User < ApplicationRecord
   def send_password_reset_email
     UserMailer.password_reset(self).deliver_now
   end
-
-  def User.new_token
-    SecureRandom.urlsafe_base64
-  end
-
-  def new_token
-    SecureRandom.urlsafe_base64
-  end
-  
 end
