@@ -1,0 +1,18 @@
+<div class="main">
+  <div class="section">
+    <%= render 'shared/above' %>
+    <div class="below">
+      <%= form_with scope: :password_reset, class: 'input', url: password_resets_path do |f| %>
+        <% flash.each do |message_type, message| %>
+          <div class="alert alert-<%= message_type %>"><%= message %></div>
+        <% end %>
+        <div class="input-1">
+          <%= f.email_field :email, class: 'below-text', placeholder: 'Enter Your Email' %>
+        </div>
+        <div class="submit2">
+          <%= f.submit 'Send', class: 'login' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
