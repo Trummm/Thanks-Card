@@ -1,0 +1,27 @@
+<%= render 'shared/header' %>
+
+<div class="center">
+  <section class="profile">
+    <div class="profile-avatar">
+      <%= image_tag(@user.image, style: 'width: 150px') if @user.image.present? %>
+    </div>
+
+    <div class="profile-right">
+      <div class="profile-title">
+        <h3><%= @user.username %></h3>
+
+        <div class="profile-submit">
+          <%= link_to "Edit Profile", edit_user_path(@user) , class: 'edit' %>  
+        </div>
+      </div>
+
+      <div class="profile-post">
+        <p><strong> 1 </strong> bai viet</p>
+      </div>
+
+      <div class="profile-username">
+        <p>"<%= @user.name %>"</p>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,1 +1,38 @@
-<%= link_to "Log Out", logout_path , class: '' %>
+<header class="header">
+  <div class="main-logo">
+    <%= image_tag("instagram_logo.svg.png", width: '103px') %>
+  </div>
+
+  <div class="main-search">
+    <%= form_tag(users_path) do %>
+      <%= text_field_tag :term%>
+      <%= submit_tag 'Search'%>
+    <% end %>
+  </div>
+
+  <div class="main-list">
+    <%= link_to "", home_path, class: 'icon-link' %>
+      <label class="material-icons">home</label>
+    <% end %>
+      <label class="material-icons header_icon-search-right-drop" for="drop-input">
+      account_circle
+
+      <input id="drop-input" class="drop-input-checked" hidden="" type="checkbox" />
+
+      <ul class="hide-list">
+        <li class="hide-list-item">
+          <%= link_to "PROFILE", user_path(current_user) %>
+        </li>
+        <li class="hide-list-item">
+          <%= link_to "SAVE", "#" %>
+        </li>
+        <li class="hide-list-item">
+          <%= link_to "SETTING", "#" %>
+        </li>
+        <li class="hide-list-item">
+          <%= link_to "LOGOUT", logout_path %>
+        </li>
+      </ul>
+      </label>
+  </div>
+</header>

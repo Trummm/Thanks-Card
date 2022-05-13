@@ -11,6 +11,8 @@ module ThanksCard
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
+    config.serve_static_assets = true
+
     config.action_mailer.delivery_method = :smtp
     host = 'localhost:3000'
     config.action_mailer.default_url_options = { host: host }

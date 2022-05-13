@@ -1,0 +1,93 @@
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  -webkit-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+  -moz-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+  box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+  .main-logo, .main-search, .main-list{
+    display: flex;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .main-search{
+    #term{
+      width: 280px;
+      height: 38px;
+      padding: 0 8px;
+      background-color: #efefef;
+      border: none;
+      outline: none;
+      border-radius: 10px;
+    }
+    input[type = "submit"]{
+      height: 38px;
+      border: none;
+      border-radius: 10px;
+      padding: 0 8px;
+      background-color: #efefef;
+      cursor: pointer;
+    }
+  }
+
+  .main-list{
+    > label{
+      font-size: 2rem;
+      margin: 0 10px;
+      cursor: pointer;
+      position: relative;
+      .hide-list{
+        position: absolute;
+        list-style: none;
+        background-color: #fff;
+        width: 180px;
+        padding: 0 10px;
+        border-radius: 6px;
+        transition: opacity 75ms linear, transform 38ms ease-out, -webkit-transform 38ms ease-out;
+        box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+        top: 49px;
+        right: 0;
+        display: none;
+        .hide-list-item{
+          display: flex;
+          align-content: center;
+          a{
+            text-decoration: none;
+            color: black;
+            font-size: 1rem;
+            margin: 8px 0;
+          }
+        }
+      }
+    }
+    .hide-list::before{
+      content: "";
+      position: absolute;
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+      width: 18px;
+      height: 18px;
+      top: -9px;
+      background-color: #fff;
+      right: 6px;
+    }
+    .drop-input-checked:checked ~ .hide-list{
+      display: block;
+    }
+    .icon-link{
+      color: black;
+      font-size: 2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      > label{
+        font-size: 2rem;
+        margin: 0 10px;
+        cursor: pointer;
+      }
+    }
+  }
+}
