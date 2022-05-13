@@ -1,7 +1,12 @@
 class User < ApplicationRecord
   attr_accessor :remember_token, :reset_token
 
+  has_one_attached :image
   has_secure_password
+
+  validates :name, presence: true, length: { maximum: 50 }
+  validates :username, presence: true, length: { maximum: 50 }
+  validates :image, allow_blank: true, format: { with: %r{\.gif|jpg|png}i, message: 'must be a url for gif, jpg, or png image.' }
 
   class << self
     def digest(string)

@@ -1,1 +1,22 @@
+<%= render 'shared/header' %>
+<div class="center">
+  <%= form_with(model: @user, local: true) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <%= f.label :username %>
+    <%= f.text_field :username, class: 'form-control' %>
 
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+
+    <%= f.label :image %>
+    <%= f.file_field :image, class: "custom-file-input" %>
+
+    <%= f.label :password %>
+    <%= f.password_field :password, class: 'form-control' %>
+
+    <%= f.label :password_confirmation, 'Confirmation' %>
+    <%= f.password_field :password_confirmation, class: 'form-control' %>
+    
+    <%= f.submit 'Update', class: 'btn btn-primary' %>
+  <% end %>
+</div>

@@ -100,6 +100,8 @@ GEM
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     marcel (1.0.2)
+    material_icons (2.2.1)
+      railties (>= 3.2)
     matrix (0.4.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
@@ -215,6 +217,7 @@ DEPENDENCIES
   figaro
   jbuilder (~> 2.7)
   listen (~> 3.3)
+  material_icons
   mysql2 (~> 0.5)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
