@@ -1,0 +1,83 @@
+.post-main{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
+}
+
+.post{
+  width: 800px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.to-member, .template{
+  display: flex;
+  align-items: center;
+}
+
+.to-member > select, .template > select{
+  width: 120px;
+  height: 26px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.to-member > label, .template > label{
+  margin: 10px 14px 10px 0;
+}
+
+.template{
+  margin: 14px 0;
+}
+
+.title-post{
+  display: flex;
+  flex-direction: column;
+}
+
+.title-time{
+  padding: 10px;
+  color: #9b9b9b;
+  font-size: 0.9rem;
+  letter-spacing: .2px;
+}
+
+.title-post > label{
+  margin: 10px 0;
+}
+
+.title-post > textarea{
+  border: 1px solid #ccc;
+}
+
+.submit-feed{
+  display: flex;
+  justify-content: flex-end;
+  margin: 18px 0 0 0;
+}
+
+.submit-feed > input{
+  width: 100px;
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #0095f6;
+  color: #fff;
+  cursor: pointer;
+}
+
+.submit-feed > input:hover{
+  background-color: #007fd4;
+}
+
+.presently{
+  display: block;
+}

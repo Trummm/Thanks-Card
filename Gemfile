@@ -3,9 +3,11 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.3'
 
-gem "figaro"
+gem 'figaro'
 
 gem 'bcrypt', '3.1.16'
+
+gem 'pry-rails'
 
 gem 'material_icons'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'

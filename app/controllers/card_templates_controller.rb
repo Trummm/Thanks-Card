@@ -1,5 +1,7 @@
 class CardTemplatesController < ApplicationController
-  def new; end
+  def new
+    @card_template = CardTemplate.new
+  end
 
   def create 
     @card = CardTemplate.new(card_params)

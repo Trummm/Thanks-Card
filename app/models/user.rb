@@ -3,6 +3,7 @@ class User < ApplicationRecord
 
   has_one_attached :image
   has_secure_password
+  has_many :thank_cards
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :username, presence: true, length: { maximum: 50 }

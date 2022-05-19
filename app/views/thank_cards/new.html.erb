@@ -1,0 +1,23 @@
+<div class="post-main">
+  <%= form_with model: @thank_card, class: 'post', url: thank_cards_path do |f| %>
+
+    <div class="to-member">
+      <%= f.label :To, class: 'to-member-span' %>
+      <%= f.collection_select :user_id, User.all, :id, :name, prompt: true %>
+    </div>
+
+    <div class="template">
+      <%= f.label :Template, class: 'to-member-span' %>
+      <%= f.collection_select :card_template_id, CardTemplate.all, :id, :name, prompt: true %>
+    </div>
+      
+    <div class="title-post">
+      <%= f.label :message %>
+      <%= f.text_area :message, row: 3, column: 10 %>
+    </div>
+
+    <div class="submit-feed">
+      <input type="submit" value="POST">
+    </div>
+  <% end %>
+</div>

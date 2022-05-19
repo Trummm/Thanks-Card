@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   
   resources :users, only: %i[show edit update]
   resources :card_templates, only: %i[new create]
+  resources :thank_cards, only: %i[new create]
   
   root to: 'sessions#new'
 end
