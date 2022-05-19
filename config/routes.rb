@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
-  root to: 'sessions#new'
+  get    '/dashboard',to: 'users#index'
   
-  get    '/login',  to: 'sessions#new'
-  post   '/login',  to: 'sessions#create'
-  get    '/logout', to: 'sessions#destroy'
-
-  get '/home', to: 'public#home'
-
+  get    '/login',    to: 'sessions#new'
+  post   '/login',    to: 'sessions#create'
+  get    '/logout',   to: 'sessions#destroy'
+  
+  
   resources :password_resets, only: %i[new create edit update]
   
-  resources :users, only: %i[index new show edit update]
+  resources :users, only: %i[show edit update]
+  resources :card_templates, only: %i[new create]
+  
+  root to: 'sessions#new'
 end

@@ -1,0 +1,23 @@
+<div class="center">
+  <%= form_with scope: :card_templates, class: 'card', url: card_templates_path do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "custom-file-input" %>
+
+    <%= f.label :image_url %>
+    <%= f.file_field :image_url, class: 'form-control' %>
+
+    <%= f.label :top %>
+    <%= f.text_field :top, class: "custom-file-input" %>
+
+    <%= f.label :right %>
+    <%= f.text_field :right, class: 'form-control' %>
+
+    <%= f.label :bottom %>
+    <%= f.text_field :bottom, class: 'form-control' %>
+
+    <%= f.label :left %>
+    <%= f.text_field :left, class: 'form-control' %>
+
+    <%= f.submit 'Create', class: 'btn btn-primary' %>
+  <% end %>
+</div>
