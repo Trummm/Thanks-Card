@@ -3,7 +3,7 @@ class CardTemplatesController < ApplicationController
 
   def create 
     @card = CardTemplate.new(card_params)
-    @card.image_url.attach(params[:image_url])
+    @card.image.attach(params[:image])
     if @card.save
       flash.now[:success] = 'Create Success!'
       redirect_to dashboard_path
@@ -14,6 +14,6 @@ class CardTemplatesController < ApplicationController
 
   private 
   def card_params
-    params.require(:card_templates).permit(:name, :image_url, :top, :right, :bottom, :left)
+    params.require(:card_template).permit(:name, :image, :top, :right, :bottom, :left)
   end
 end
