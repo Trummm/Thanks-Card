@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_19_032355) do
+ActiveRecord::Schema.define(version: 2022_05_19_090105) do
 
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -39,14 +39,15 @@ ActiveRecord::Schema.define(version: 2022_05_19_032355) do
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
+
   create_table "card_templates", charset: "utf8mb3", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.json "top"
-    t.json "right"
-    t.json "bottom"
-    t.json "left"
     t.string "name"
+    t.string "top"
+    t.string "right"
+    t.string "bottom"
+    t.string "left"
   end
 
   create_table "thank_cards", charset: "utf8mb3", force: :cascade do |t|
