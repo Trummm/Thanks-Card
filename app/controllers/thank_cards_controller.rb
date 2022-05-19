@@ -1,6 +1,6 @@
 class ThankCardsController < ApplicationController
   def new
-    @thank_card = ThankCard.includes(:user, :card_template)
+    @thank_card = ThankCard.new
   end
 
   def create

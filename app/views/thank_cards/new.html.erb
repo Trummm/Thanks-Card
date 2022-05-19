@@ -1,6 +1,5 @@
 <div class="post-main">
-  <%= form_with model: @thank_card, class: 'post', url: thank_cards_path do |f| %>
-
+  <%= form_with model: @thank_card, class: 'post' do |f| %>
     <div class="to-member">
       <%= f.label :To, class: 'to-member-span' %>
       <%= f.collection_select :user_id, User.all, :id, :name, prompt: true %>
