@@ -4,18 +4,30 @@
   </div>
 
   <div class="main-search">
-    <%= form_tag(users_path) do %>
+    <%= form_tag(dashboard_path) do %>
       <%= text_field_tag :term%>
       <%= submit_tag 'Search'%>
     <% end %>
   </div>
 
   <div class="main-list">
-    <%= link_to "", home_path, class: 'icon-link' %>
+    <% if current_user.admin? %>
+      <%= link_to new_card_template_path, class: 'icon-link' do %>
+        <label class="material-icons">add_box</label>
+      <% end %>
+    <% end %>
+
+    <%= link_to dashboard_path, class: 'icon-link' do %>
       <label class="material-icons">home</label>
     <% end %>
+
+    <%= link_to new_thank_card_path, class: 'icon-link' do %>
+      <label class="material-icons">add_circle_outline</label>
+    <% end %>
+
+    <label class="material-icons">favorite_border</label>
       <label class="material-icons header_icon-search-right-drop" for="drop-input">
-      account_circle
+      person_outline
 
       <input id="drop-input" class="drop-input-checked" hidden="" type="checkbox" />
 

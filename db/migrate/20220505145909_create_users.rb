@@ -8,7 +8,8 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :gender
       t.integer :phone
       t.string :password_digest
-
+      t.boolean :admin
+      
       t.timestamps
     end
   end
