@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_19_090105) do
+ActiveRecord::Schema.define(version: 2022_05_22_150502) do
 
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 2022_05_19_090105) do
     t.string "right"
     t.string "bottom"
     t.string "left"
+    t.string "background"
   end
 
   create_table "thank_cards", charset: "utf8mb3", force: :cascade do |t|
