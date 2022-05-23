@@ -1,13 +1,10 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
 
-  def not_found
-    raise ActionController::RoutingError.new('Not Found')
-  rescue
-    render_404
-  end
-
-  def render_404
-    render :file => "#{Rails.root}/public/404.html",  layout: false, status: :not_found
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+ 
+  private
+  def record_not_found
+    render plain: "404 Not Found", status: 404
   end
 end

@@ -20,7 +20,7 @@ class CardTemplatesController < ApplicationController
 
   private 
   def find_card
-    @card_template = CardTemplate.find_by(id: params[:id]) or not_found
+    @card_template = CardTemplate.find_by(id: params[:id]) or record_not_found
   end
 
   def card_params
