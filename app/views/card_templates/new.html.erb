@@ -4,9 +4,11 @@
   <div class="card-list">
     <h1>List all Templates:</h1>
     <% @card_templates.each do |card| %>
-      <div class="card-list-item" style="background-image: url( <%= url_for(card.background) %> )">
-        <div class="card-list-inside" style="top: <%= card.top %>px; right: <%= card.right %>px; bottom: <%= card.bottom %>px; left: <%= card.left %>px"></div>
-      </div>
+      <%= link_to card do %>
+        <div class="card-list-item" style="background-image: url( <%= url_for(card.background) %> )">
+          <div class="card-list-inside" style="top: <%= card.top %>px; right: <%= card.right %>px; bottom: <%= card.bottom %>px; left: <%= card.left %>px"></div>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>
