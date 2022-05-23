@@ -45,27 +45,26 @@
   }
   .card-list-item-show{
     position: relative;
-      width: 680px;
-      height: 380px;
-      border: 1px solid #ccc;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
+    width: 680px;
+    height: 380px;
+    border: 1px solid #ccc;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     .card-list-inside-show{
       position: absolute;
-        display: flex;
-        font-family: 'Oleo Script Swash Caps', cursive;
-        justify-content: center;
-        word-break: break-all;
-        text-align: center;
-        width: 200px;
-        height: 70px;
-        font-size: 0.6rem;
-        background-image: url();
-        background-color: transparent;
+      display: flex;
+      font-family: 'Oleo Script Swash Caps', cursive;
+      justify-content: center;
+      word-break: break-all;
+      text-align: center;
+      width: 200px;
+      height: 70px;
+      font-size: 0.6rem;
+      background-image: url();
+      background-color: transparent;
     }
   }
-
   .info{
     margin-left: 20px;
     line-height: 2.2rem;
