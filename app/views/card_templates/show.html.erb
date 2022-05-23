@@ -1,6 +1,6 @@
 <div class="center-show">  
   <div class="show">
-    <div class="card-list-item-show" style="background-image: url( <%= @card_template.background %> )">
+    <div class="card-list-item-show" style="background-image: url( <%= url_for(@card_template.background) %> )">
       <div class="card-list-inside-show" style="top: <%= @card_template.top %>px; right: <%= @card_template.right %>px; bottom: <%= @card_template.bottom %>px; left: <%= @card_template.left %>px">
         << Text here>>
       </div>

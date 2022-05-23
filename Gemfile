@@ -9,7 +9,7 @@ gem 'bcrypt', '3.1.16'
 
 gem 'pry-rails'
 
-gem "image_processing", ">= 1.2"
+gem 'image_processing', '>= 1.2'
 
 gem 'material_icons'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
