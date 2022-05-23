@@ -1,13 +1,11 @@
 .center{
-  width: 1000px;
+  width: 1200px;
   margin: 0 auto;
-  margin-top: 50px;
-  height: 100vh;
+  margin-top: 110px;
 
   form{
     display: flex;
     flex-direction: column;
-    height: 100%;
 
     > input{
       height: 20px;
