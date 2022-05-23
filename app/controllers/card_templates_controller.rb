@@ -4,6 +4,10 @@ class CardTemplatesController < ApplicationController
     @card_templates = CardTemplate.all
   end
 
+  def show 
+    @card_template = CardTemplate.find_by(id: params[:id])
+  end
+
   def create 
     @card = CardTemplate.new(card_params)
     if @card.save
