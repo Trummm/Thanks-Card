@@ -1,8 +1,20 @@
+<%= render 'shared/header' %>
 <div class="center-show">  
   <div class="show">
     <div class="card-list-item-show" style="background-image: url( <%= url_for(@card_template.background) %> )">
       <div class="card-list-inside-show" style="top: <%= @card_template.top %>px; right: <%= @card_template.right %>px; bottom: <%= @card_template.bottom %>px; left: <%= @card_template.left %>px">
         << Text here>>
+      </div>
+    </div>
+
+    <div class="info">
+      <h1>Information:</h1>
+      <h3>Name: <%= @card_template.name %></h3>
+      <h3>Created At: <%= time_ago_in_words(@card_template.created_at) %></h3>
+      <h3>Update At: <%= time_ago_in_words(@card_template.updated_at) %></h3>
+      <div class="button">
+        <%= link_to "Edit", "#" %>
+        <%= link_to "Delete", "#" %>
       </div>
     </div>
   </div>

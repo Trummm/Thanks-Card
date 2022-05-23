@@ -65,4 +65,25 @@
         background-color: transparent;
     }
   }
+
+  .info{
+    margin-left: 20px;
+    line-height: 2.2rem;
+    .button{
+      display: flex;
+      > a{
+        display: block;
+        width: 100px;
+        text-align: center;
+        border: 1px solid black;
+        color: black;
+        text-decoration: none;
+        margin-top: 20px;
+        border-radius: 10px;
+      }
+      > a:nth-child(2){
+        margin-left: 10px;
+      }
+    }
+  }
 }
