@@ -1,16 +1,14 @@
 <%= render 'shared/header' %>
 <div class="center">
-  <%= render 'shared/form_card_template' %>
+  <%= render 'form' %>
 
   <div class="card-list">
     <h1>List all Templates:</h1>
     <% @card_templates.each do |card| %>
-      <%# <% card.thank_cards.each do |mess| %> 
       <div class="card-list-item" style="background-image: url( <%= card.background %> )">
           <div class="card-list-inside" style="top: <%= card.top %>px; right: <%= card.right %>px; bottom: <%= card.bottom %>px; left: <%= card.left %>px">
           </div>
       </div>
-      <%# <% end %> 
     <% end %>
   </div>
 </div>
