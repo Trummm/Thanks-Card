@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get    '/dashboard',to: 'users#index'
+  get    '/dashboard',to: 'thank_cards#index'
   
   get    '/login',    to: 'sessions#new'
   post   '/login',    to: 'sessions#create'

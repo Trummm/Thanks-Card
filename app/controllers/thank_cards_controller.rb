@@ -1,4 +1,8 @@
 class ThankCardsController < ApplicationController
+  def index
+    @thank_cards = ThankCard.all
+    @users = User.all
+  end
   def new
     @thank_card = ThankCard.new
   end
