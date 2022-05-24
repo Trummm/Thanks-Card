@@ -1,9 +1,9 @@
 <%= render 'shared/header' %>
 
-<div class="center">
+<div class="center-user">
   <section class="profile">
     <div class="profile-avatar">
-      <%= image_tag(@user.image, style: 'width: 150px') if @user.image.present? %>
+      <%= image_tag url_for(@user.image), style: 'width: 150px' if @user.image.present? %>
     </div>
 
     <div class="profile-right">

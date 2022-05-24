@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    @thank_cards = ThankCard.all
   end
 
   def show; end

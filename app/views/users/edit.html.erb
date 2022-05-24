@@ -1,5 +1,5 @@
 <%= render 'shared/header' %>
-<div class="center">
+<div class="center-user">
   <%= form_with(model: @user, local: true) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
     <%= f.label :username %>

@@ -1,1 +1,81 @@
 <%= render 'shared/header' %>
+<div class="feed-main">
+  <div class="feed">
+    <div class="feed-section-left-all">
+      <% @thank_cards.each do |feed| %>
+        <div class="feed-section_left">
+          <div class="above-section">
+            <div class="title">
+              <div class="title-avatar">
+                <%= image_tag(feed.user.image, width: '42px') if feed.user.image.present? %>
+              </div>
+              <h4 class="title-text"><%= feed.user.name %></h4>
+      
+            </div>
+
+            <div class="thankscard">
+              <div class="card-list-item-show" style="background-image: url( <%= url_for(feed.card_template.background) %> )">
+                <div class="card-list-inside-show" style="top: <%= feed.card_template.top %>px; right: <%= feed.card_template.right %>px; bottom: <%= feed.card_template.bottom %>px; left: <%= feed.card_template.left %>px">
+                  <%= feed.message %>
+                </div>
+              </div>
+            </div>
+
+            <div class="icons-feed">
+              <span class="material-icons">favorite_border</span>
+
+              <span class="material-icons">chat_bubble_outline</span>
+
+              <span class="material-icons">share</span>
+            </div>
+
+            <div class="title-time">
+                Posted <%= time_ago_in_words(feed.created_at) %> ago.
+            </div>  
+          </div>
+
+          <div class="comment">
+            <div class="comment-flex">
+              <span class="material-icons">sentiment_satisfied_alt</span>
+              <input type="text" placeholder="Add Comment" />
+
+              <a href="">Add</a>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+      <div class="feed-section_right">
+        <div class="feed-section_right-header">
+          <div class="feed-section_right-img">
+            <%= image_tag(current_user.image, width: '52px') if current_user.image.present? %>
+          </div>
+
+          <div class="feed-section_right-section-title">
+            <div class="feed-section_right-text">
+              <p><%= current_user.name %></p>
+              <p><%= current_user.username %></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feed-section_right-section">
+          <p>Another Users</p>
+        </div>
+
+        <% @users.each do |user| %>
+          <div class="feed-section_right-section-another">
+            <div class="feed-section_right-img-section">
+              <%= image_tag(user.image, width: '52px') if user.image.present? %>
+            </div>
+
+            <div class="feed-section_right-text-section">
+              <p><%= user.name %></p>
+              <p><%= user.username %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+</div>

@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.3'
 
+gem 'active_storage_validations', '0.8.2'
+
 gem 'figaro'
 
 gem 'bcrypt', '3.1.16'
