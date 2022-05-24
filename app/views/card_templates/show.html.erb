@@ -13,8 +13,8 @@
       <h3>Created At: <%= time_ago_in_words(@card_template.created_at) %></h3>
       <h3>Update At: <%= time_ago_in_words(@card_template.updated_at) %></h3>
       <div class="button">
-        <%= link_to "Edit", "#" %>
-        <%= link_to "Delete", "#" %>
+        <%= link_to "Edit", edit_card_template_path %>
+        <%= link_to 'Delete', @card_template, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn_delete-users' %>
       </div>
     </div>
   </div>

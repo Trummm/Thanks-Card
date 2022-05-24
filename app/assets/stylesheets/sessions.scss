@@ -64,8 +64,7 @@
   align-items: center;
 }
 
-.below-text,
-.below-pass{
+.below-text, .below-pass{
   padding: 10px;
   width: 260px;
   border-radius: 10px;
@@ -74,8 +73,7 @@
   margin: 0 10px;
 }
 
-.input-1,
-.checkbox{
+.input-1, .checkbox{
   display: flex;
   justify-content: center;
   margin: 10px 0;
@@ -98,8 +96,7 @@
   flex-direction: column;
 }
 
-.login,
-.create{
+.login, .create{
   width: 400px;
   margin: 10px 0;
   height: 40px;
