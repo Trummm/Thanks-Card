@@ -146,14 +146,18 @@
   color: #252525;
   font-size: 1.6rem;
 }
-.title > h4{
+.title .title-text{
   color: #252525;
   margin-left: 14px;
-  min-width: 215px;
 }
 .title-avatar > img{
   width: 42px;
   height: 42px;
+  border-radius: 50%;
+}
+.title-avatar-to > img{
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
 }
 .thankscard > img{

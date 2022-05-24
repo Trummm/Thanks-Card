@@ -10,7 +10,13 @@
                 <%= image_tag(feed.user.image, width: '42px') if feed.user.image.present? %>
               </div>
               <h4 class="title-text"><%= feed.user.name %></h4>
-      
+
+              <p style="margin-left: 20px; margin-right: 20px;"><i>Thanks To:</i></p>
+
+              <div class="title-avatar-to">
+                <%= image_tag(feed.user.image, width: '20px') if feed.user.image.present? %>
+              </div>
+              <h4 class="title-text"><i><%= feed.user.name %></i></h4>
             </div>
 
             <div class="thankscard">

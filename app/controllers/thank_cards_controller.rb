@@ -5,7 +5,7 @@ class ThankCardsController < ApplicationController
 
   def create
     @thank_card = ThankCard.new(thank_card_params)
-    @thank_card.user_id = current_user.id
+    @thank_card.user = current_user
     if @thank_card.save
       flash[:success] = 'Create Success!'
       redirect_to dashboard_path
