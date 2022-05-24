@@ -30,7 +30,7 @@ class CardTemplatesController < ApplicationController
   end
 
   def destroy
-    if @card_template&.destroy
+    if @card_template.destroy
       flash[:success] = "User deleted"
     else
       flash[:danger] = "Delete fail!"

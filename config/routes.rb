@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :password_resets, only: %i[new create edit update]
   
   resources :users, only: %i[show edit update]
-  resources :card_templates, except: [:index]
+  resources :card_templates, except: :index
   resources :thank_cards, only: %i[new create]
   
   root to: 'sessions#new'
