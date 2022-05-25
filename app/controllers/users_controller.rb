@@ -1,11 +1,6 @@
 class UsersController < ApplicationController
   before_action :find_user, only: %i[show edit update]
 
-  def index
-    @users = User.all
-    @thank_cards = ThankCard.all
-  end
-
   def show; end
 
   def edit; end

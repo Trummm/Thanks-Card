@@ -175,7 +175,15 @@
   justify-content: center;
 }
 .above-section{
+  position: relative;
   flex: 1;
+}
+.above-section::after{
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 2px;
+  background-color: #efefef;
 }
 .feed-section-left-all{
   width: 100%;
@@ -250,12 +258,36 @@
 }
 .icons-feed{
   margin: 10px 0;
+  display: flex;
+  align-items: center;
+  > form{
+    width: 28px;
+    height: 28px;
+    margin-top: 10px;
+    margin-left: 10px;
+    > button{
+      background: none;
+      border: none;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      > span{
+        font-size: 28px;
+      }
+    }
+  }
 }
-.icons-feed > span{
+.like{
+  font-size: 14px;
+  padding: 10px;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-weight: 600;
+}
+.icons-feed > svg{
   font-size: 1.8rem;
   cursor: pointer;
   margin-top: 10px;
-  margin-left: 10px;
+  margin-left: 16px;
   color: #252525;
 }
 .comment{
@@ -297,7 +329,8 @@
   margin: 0 0 10px 0;
 }
 .feed-section_right{
-  margin-left: 20px;
+  position: fixed;
+  right: 450px;
 }
 .feed-section_right-header{
   display: flex;
@@ -313,6 +346,7 @@
 }
 .feed-section_right-text > p{
   margin-left: 18px;
+  font-weight: 900;
 }
 .feed-section_right-text > p:nth-child(1){
   font-size: 0.9rem;
@@ -323,6 +357,10 @@
 }
 .feed-section_right-section{
   margin: 10px 0;
+}
+.feed-section_right-section > p{
+  font-weight: 900;
+  color: #8e8e8e;
 }
 .feed-section_right-section-another{
   display: flex;
@@ -339,6 +377,7 @@
 }
 .feed-section_right-text-section > p:nth-child(1){
   font-size: 0.9rem;
+  font-weight: 900;
 }
 .feed-section_right-text-section > p:nth-child(2){
   font-size: 0.9rem;
