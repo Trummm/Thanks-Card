@@ -2,54 +2,10 @@
 <div class="feed-main">
   <div class="feed">
     <div class="feed-section-left-all">
-      <% @thank_cards.each do |feed| %>
-        <div class="feed-section_left">
-          <div class="above-section">
-            <div class="title">
-              <div class="title-avatar">
-                <%= image_tag(feed.user.image, width: '42px') if feed.user.image.present? %>
-              </div>
-              <h4 class="title-text"><%= feed.user.name %></h4>
-
-              <p style="margin-left: 20px; margin-right: 20px;"><i>Thanks To:</i></p>
-
-              <div class="title-avatar-to">
-                <%= image_tag(feed.user.image, width: '20px') if feed.user.image.present? %>
-              </div>
-              <h4 class="title-text"><i><%= feed.user.name %></i></h4>
-            </div>
-
-            <div class="thankscard">
-              <div class="card-list-item-show" style="background-image: url( <%= url_for(feed.card_template.background) %> )">
-                <div class="card-list-inside-show" style="top: <%= feed.card_template.top %>px; right: <%= feed.card_template.right %>px; bottom: <%= feed.card_template.bottom %>px; left: <%= feed.card_template.left %>px">
-                  <%= feed.message %>
-                </div>
-              </div>
-            </div>
-
-            <div class="icons-feed">
-              <span class="material-icons">favorite_border</span>
-
-              <span class="material-icons">chat_bubble_outline</span>
-
-              <span class="material-icons">share</span>
-            </div>
-
-            <div class="title-time">
-                Posted <%= time_ago_in_words(feed.created_at) %> ago.
-            </div>  
-          </div>
-
-          <div class="comment">
-            <div class="comment-flex">
-              <span class="material-icons">sentiment_satisfied_alt</span>
-              <input type="text" placeholder="Add Comment" />
-
-              <a href="">Add</a>
-            </div>
-          </div>
+        <div id="products">
+          <%= render @thank_cards %>
         </div>
-      <% end %>
+        <%= will_paginate @thank_cards, renderer: BootstrapPagination::Rails %>
     </div>
 
       <div class="feed-section_right">

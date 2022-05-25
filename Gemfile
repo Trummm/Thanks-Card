@@ -11,6 +11,14 @@ gem 'bcrypt', '3.1.16'
 
 gem 'pry-rails'
 
+gem 'will_paginate'
+
+gem 'will_paginate-bootstrap'
+
+gem 'bootstrap-sass', '~> 3.4.1'
+
+gem 'sass-rails', '>= 6'
+
 gem 'image_processing', '>= 1.2'
 
 gem 'material_icons'
