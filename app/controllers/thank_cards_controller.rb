@@ -9,7 +9,6 @@ class ThankCardsController < ApplicationController
   end
 
   def create
-    @thank_card = ThankCard.new(thank_card_params)
     @thank_card = current_user.thank_cards.new(thank_card_params)
     if @thank_card.save
       flash[:success] = 'Create Success!'
