@@ -1,1 +1,5 @@
 <%= render 'shared/header' %>
+<div class="center-user-list">
+  <%= render @users %>
+  <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
+</div>

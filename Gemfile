@@ -3,11 +3,21 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.3'
 
+gem 'active_storage_validations', '0.8.2'
+
 gem 'figaro'
 
 gem 'bcrypt', '3.1.16'
 
 gem 'pry-rails'
+
+gem 'will_paginate'
+
+gem 'will_paginate-bootstrap'
+
+gem 'bootstrap-sass', '~> 3.4.1'
+
+gem 'sass-rails', '>= 6'
 
 gem 'image_processing', '>= 1.2'
 

@@ -1,0 +1,33 @@
+<%= render 'shared/header' %>
+<div class="feed-main">
+  <div class="feed">
+    <div class="feed-section-left-all">
+        <div id="products">
+          <%= render @thank_cards %>
+        </div>
+        <%= will_paginate @thank_cards, renderer: BootstrapPagination::Rails %>
+    </div>
+
+      <div class="feed-section_right">
+        <div class="feed-section_right-header">
+          <div class="feed-section_right-img">
+            <%= image_tag(current_user.image, width: '52px') if current_user.image.present? %>
+          </div>
+
+          <div class="feed-section_right-section-title">
+            <div class="feed-section_right-text">
+              <p><%= current_user.name %></p>
+              <p><%= current_user.username %></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feed-section_right-section">
+          <p>Another Users</p>
+        </div>
+
+        <%= render @users %>
+        <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
+      </div>
+    </div>
+</div>
