@@ -1,7 +1,7 @@
 class ThankCardsController < ApplicationController
   def index
     @thank_cards = ThankCard.all.paginate(page: params[:page], per_page: 3)
-    @users = User.all
+    @users = User.limit(3)
   end
 
   def new

@@ -324,6 +324,11 @@
 .feed-section_right-section{
   margin: 10px 0;
 }
+.feed-section_right-section > a{
+  text-decoration: none;
+  color: black;
+  font-weight: 900;
+}
 .feed-section_right-section-another{
   display: flex;
   align-items: center;
@@ -348,4 +353,16 @@
 .pagination{
   display: flex;
   list-style: none;
+  margin-top: 20px;
+  color: black;
+  cursor: pointer;
+  li{
+    // margin: 0 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    a{
+      text-decoration: none;
+      color: black;
+    }
+  }
 }
