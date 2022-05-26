@@ -367,9 +367,10 @@
 .feed-section_right-section{
   margin: 10px 0;
 }
-.feed-section_right-section > p{
+.feed-section_right-section > a{
+  text-decoration: none;
+  color: black;
   font-weight: 900;
-  color: #8e8e8e;
 }
 .feed-section_right-section-another{
   display: flex;
@@ -393,59 +394,19 @@
   color: #9b9b9b;
 }
 
-.center-card{
-  width: 1200px;
-  margin: 0 auto;
-  margin-top: 110px;
-  height: 858px;
+.pagination{
   display: flex;
-  align-items: center;
-  .main-show{
-    width: 100%;
+  list-style: none;
+  margin-top: 20px;
+  color: black;
+  cursor: pointer;
+  li{
+    // margin: 0 10px;
+    padding: 10px;
     border: 1px solid #ccc;
-  }
-  .title-right{
-    min-width: 515px;
-    background-color: #fff;
-    .title-show{
-      position: relative;
-      display: flex;
-      align-items: center;
-      padding: 10px;
-      .title-text-show{
-        margin-left: 10px;
-      }
-    }
-
-    .title-show::after{
-      position: absolute;
-      content: "";
-      width: 100%;
-      height: 1px;
-      background-color: #efefef;
-      bottom: 3px;
-    }
-    .title-avatar-show{
-      img{
-        border-radius: 50%;
-      }
-    }
-
-    .comment-show{
-      height: 250px;
-    }
-
-    .reaction{
-      height: 66px;
-      position: relative;
-    }
-
-    .reaction::after{
-      position: absolute;
-      content: "";
-      width: 100%;
-      height: 1px;
-      background-color: #efefef;
+    a{
+      text-decoration: none;
+      color: black;
     }
   }
 }

@@ -1,20 +1,15 @@
 class ThankCardsController < ApplicationController
   def index
-    @thank_cards = ThankCard.all
-    @users = User.all
+    @thank_cards = ThankCard.all.paginate(page: params[:page], per_page: 3)
+    @users = User.all.paginate(page: params[:page], per_page: 3)
   end
 
   def new
     @thank_card = ThankCard.new
   end
 
-  def show
-    @thank_card = ThankCard.find_by!(id: params[:id])
-  end
-
   def create
-    @thank_card = ThankCard.new(thank_card_params)
-    @thank_card.user = current_user
+    @thank_card = current_user.thank_cards.new(thank_card_params)
     if @thank_card.save
       flash[:success] = 'Create Success!'
       redirect_to dashboard_path
