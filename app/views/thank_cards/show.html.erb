@@ -1,0 +1,29 @@
+<%= render 'shared/header' %>
+<div class="center-card">
+  <div class="main-show">
+    <div class="feed-section_left" style="flex: 0; flex-direction: row; margin: 0; border: none">
+      <div class="above-section">
+          <div class="thankscard">
+            <div class="card-list-item-show" style="background-image: url( <%= url_for(@thank_card.card_template.background) %> )">
+            <div class="card-list-inside-show" style="top: <%= @thank_card.card_template.top %>px; right: <%= @thank_card.card_template.right %>px; bottom: <%= @thank_card.card_template.bottom %>px; left: <%= @thank_card.card_template.left %>px">
+              <%= @thank_card.message %>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="title-right">
+      <div class="title-show">
+        <div class="title-avatar-show">
+          <%= image_tag(@thank_card.user.image, width: '42px') if @thank_card.user.image.present? %>
+        </div>
+        <h4 class="title-text-show"><%= @thank_card.user.name %></h4>
+      </div>
+
+      <div class="comment-show">
+      </div>
+
+      <div class="reaction">
+      </div>
+    </div>
+  </div>
+</div>

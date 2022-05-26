@@ -3,8 +3,13 @@ class ThankCardsController < ApplicationController
     @thank_cards = ThankCard.all
     @users = User.all
   end
+
   def new
     @thank_card = ThankCard.new
+  end
+
+  def show
+    @thank_card = ThankCard.find_by!(id: params[:id])
   end
 
   def create
