@@ -4,7 +4,7 @@ class CreateThankCards < ActiveRecord::Migration[6.1]
       t.references :user, null: false, foreign_key: true
       t.references :card_template, null: false, foreign_key: true
       t.string :message
-      t.string :service_name
+      t.string :name
       t.integer :total_likes_count
       
       t.timestamps

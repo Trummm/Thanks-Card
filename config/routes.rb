@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get    '/login',                         to: 'sessions#new'
   post   '/login',                         to: 'sessions#create'
   get    '/logout',                        to: 'sessions#destroy'
-  get    'thank_card/like/:thank_card_id', to:"likes#create"
+  get    'thank_card/like/:thank_card_id', to: 'likes#create'
   
   
   resources :password_resets, only: %i[new create edit update]

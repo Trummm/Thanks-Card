@@ -91,7 +91,6 @@ ActiveRecord::Schema.define(version: 2022_05_26_161348) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "feeds", "users"
   add_foreign_key "likes", "thank_cards"
   add_foreign_key "likes", "users"
   add_foreign_key "thank_cards", "card_templates"
