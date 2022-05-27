@@ -15,5 +15,19 @@
 
   <body>
     <%= yield %>
+    <script>
+      $(function(){
+        $(".thank-card-like").on("click", function(){
+        var thank_card_id = $(this).data("id")
+
+        $.ajax({
+          url: "/thank_card/like/"+thank_card_id,
+          method: "GET"
+        }).done(function(res){
+            console.log(res)
+        })
+      })
+    })
+    </script>
   </body>
 </html>

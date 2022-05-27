@@ -290,6 +290,20 @@
   margin-left: 16px;
   color: #252525;
 }
+.icons-feed > span{
+  font-size: 1.8rem;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-left: 16px;
+  color: #ed4956;
+}
+.icons-feed > svg.active{
+  font-size: 1.8rem;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-left: 16px;
+  fill: #ed4956;
+}
 .icons-feed > a{
   svg{
     font-size: 1.8rem;

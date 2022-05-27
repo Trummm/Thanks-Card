@@ -7,6 +7,7 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
+require('jquery')
   var balls = document.getElementsByClassName("ball")
     document.onmousemove = () => {
       var x = event.clientX * 100 / window.innerWidth + '%'

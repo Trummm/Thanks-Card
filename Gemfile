@@ -19,6 +19,8 @@ gem 'bootstrap-sass', '~> 3.4.1'
 
 gem 'sass-rails', '>= 6'
 
+gem 'jquery-rails'
+
 gem 'image_processing', '>= 1.2'
 
 gem 'material_icons'

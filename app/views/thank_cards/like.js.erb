@@ -1,0 +1,7 @@
+<% if @success == true %>
+  $(".like-<%= @thank_card_id %>").addClass("active")
+<% else %>
+  $(".like-<%= @thank_card_id %>").removeClass("active")
+<% end %>
+
+$("#thank_card-<%= @thank_card_id %>-likes").text(" <%= @thank_card_likes %> likes")

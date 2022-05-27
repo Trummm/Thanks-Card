@@ -1,31 +1,23 @@
 class LikesController < ApplicationController
-  before_action :find_like, only: [:destroy]
-
   def create
-    @like = current_user.likes.new(like_params)
-    if !@like.save
-      flash.now[:notice] = @like.errors.full_messages.to_sentence
-    else
-      flash.now[:success] = "Like Success!"
-      redirect_to dashboard_path
+    @like = current_user.likes.new(thank_card_id: params[:thank_card_id], user_id: current_user.id)
+    @thank_card_id = params[:thank_card_id]
+    existing_like = Like.where(thank_card_id: params[:thank_card_id], user_id: current_user.id)
+
+    respond_to do |format|
+      format.js{
+        if existing_like.any?
+          existing_like.first.destroy
+          @success = false
+        elsif @like.save
+          @success = true
+        else
+          @success = false
+        end
+         
+        @thank_card_likes = ThankCard.find(@thank_card_id).total_likes_count
+        render "thank_cards/like"
+      }
     end
-  end
-
-  def destroy
-    if @like.destroy
-      flash.now[:success] = "Unlike Success!"
-      redirect_to dashboard_path
-    else
-      flash.now[:notice] = @like.errors.full_messages.to_sentence
-    end
-  end
-
-  private
-  def find_like
-    @like = current_user.likes.find(params[:id])
-  end
-
-  def like_params
-    params.require(:like).permit(:thank_card_id)
   end
 end
