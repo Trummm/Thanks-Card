@@ -1,0 +1,114 @@
+<div
+  class="comment-user-list"
+  style="display: flex; margin: 14px 0; justify-content: space-between"
+>
+  <div style="display: flex">
+    <div class="comment-user-img" style="width: 32px; height: 32px">
+      <% if comment.user.image.present? %> <%= image_tag(comment.user.image,
+      width: '32px', style: "border-radius: 50%; width: 32px; height: 32px") %>
+      <% else %> <%= image_tag 'default.png', style: 'width: 32px; height: 32px;
+      border-radius: 50%' %> <% end %>
+    </div>
+    <div style="margin-left: 10px; max-width: 410px">
+      <div
+        class="comment-user-name"
+        style="
+          margin: 0;
+          display: inline;
+          font-family: 'Roboto', sans-serif;
+          font-weight: 400;
+        "
+      >
+        <strong>
+          <%= comment.user.name %> <% if comment.user.admin? %>
+          <i
+            data-visualcompletion="css-img"
+            aria-label="Tài khoản đã xác minh"
+            role="img"
+            style="
+              margin: 0 4px;
+              background-image: url('https://static.xx.fbcdn.net/rsrc.php/v3/yG/r/AIv5-9MmZfT.png');
+              background-position: -85px -109px;
+              background-size: auto;
+              width: 12px;
+              height: 12px;
+              background-repeat: no-repeat;
+              display: inline-block;
+            "
+          ></i>
+          <% end %>
+        </strong>
+      </div>
+      <div class="comment-user-text" style="display: inline">
+        <p
+          style="display: inline; work;word-break: break-all;font-family: 'Montserrat', sans-serif;"
+        >
+          <%= comment.comment %>
+        </p>
+        <% if comment.image.present? %>
+        <div style="width: 615px">
+          <%= image_tag(comment.image, style: "width: 100%") %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <label
+      class="drop-detail"
+      style="position: relative; cursor: pointer"
+      for="drop-input-detail-<%= comment.id %>"
+    >
+      <svg
+        aria-label="Tùy chọn khác"
+        class="_8-yf5"
+        color="#262626"
+        fill="#262626"
+        height="24"
+        role="img"
+        viewBox="0 0 24 24"
+        width="24"
+      >
+        <circle cx="12" cy="12" r="1.5"></circle>
+        <circle cx="6" cy="12" r="1.5"></circle>
+        <circle cx="18" cy="12" r="1.5"></circle>
+      </svg>
+
+      <input
+        id="drop-input-detail-<%= comment.id %>"
+        class="drop-input-checked-detail-<%= comment.id %>"
+        hidden=""
+        type="checkbox"
+      />
+
+      <ul
+        style="
+          list-style: none;
+          display: none;
+          width: 130px;
+          position: absolute;
+          z-index: 999;
+          background-color: #fff;
+          list-style: none;
+          padding: 10px;
+          box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+          border-radius: 10px;
+          right: 27px;
+          top: 0;
+        "
+        class="hide-list-detail-<%= comment.id %>"
+      >
+        <%= link_to comment, method: :delete, data: { confirm: 'Are you sure?'
+        }, class: 'btn_delete-users', style: "text-decoration: none; color:
+        black; display: block; margin: 6px 0" do %>
+        <li>Delete</li>
+        <% end %> <%= link_to edit_comment_path(comment), class:
+        'btn_delete-users', style: "text-decoration: none; color: black;
+        display: block; margin: 6px 0" do %>
+        <li>Edit</li>
+        <% end %>
+      </ul>
+    </label>
+  </div>
+</div>

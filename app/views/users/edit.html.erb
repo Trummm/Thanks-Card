@@ -1,21 +1,41 @@
-<%= render 'shared/header' %>
+<%= render 'shared/header_no_form' %>
 <div class="center-user">
   <%= form_with(model: @user, local: true) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
+    <div style="margin-bottom: 20px; display: flex; align-items: center">
+      <% if @user.image.present? %>
+        <%= image_tag(@user.image, width: '100px', height: '100px', style: 'border-radius: 50%') %>
+      <% else %>
+        <%= image_tag('default.png', width: '100px', height: '100px', style: 'border-radius: 50%') %>
+      <% end %>
+      <div style="display: flex; flex-direction: column; margin-left: 20px">
+        <%= @user.name %>
+        <%= f.label :change_image, for: "img-inp", style: 'cursor: pointer; color: #0095f6;font-weight: 900;margin-top: 6px' %>
+        <%= f.file_field :image, class: "custom-file-input", hidden: true, id: "img-inp"  %>
+      </div>
+    </div>
+
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control', disabled:"", style: 'background-color: #efefef;color: #9b9b9b;cursor:not-allowed' %>
+
     <%= f.label :username %>
     <%= f.text_field :username, class: 'form-control' %>
 
-    <%= f.label :name %>
-    <%= f.text_field :name, class: 'form-control' %>
+    <div class="radio">
+      <%= f.label :gender, style: "font-weight: 900" %>
+        <%= f.label :gender, 'Male', value: :male %>
+        <%= f.radio_button :gender, 'Male' %> 
+        <%= f.label :gender, 'Female', value: :Female %>
+        <%= f.radio_button :gender, 'Female' %>
+      <%= f.label :gender, 'Other', value: :Other %>
+      <%= f.radio_button :gender, 'Other' %>
+  </div>
 
-    <%= f.label :image %>
-    <%= f.file_field :image, class: "custom-file-input" %>
+    <%= f.label :birthday %>
+    <%= f.date_field :birthday, class: 'form-control' %>
 
-    <%= f.label :password %>
-    <%= f.password_field :password, class: 'form-control' %>
-
-    <%= f.label :password_confirmation, 'Confirmation' %>
-    <%= f.password_field :password_confirmation, class: 'form-control' %>
+    <%= f.label :phone %>
+    <%= f.text_field :phone, class: 'form-control' %>
     
     <%= f.submit 'Update', class: 'btn btn-primary' %>
   <% end %>

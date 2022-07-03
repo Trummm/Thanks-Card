@@ -6,28 +6,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps:wght@400;700&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;700&family=Oleo+Script+Swash+Caps:wght@400;700&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;700&family=Oleo+Script+Swash+Caps:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Joan&display=swap" rel="stylesheet"> 
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4371/4371088.png" type="image/gif" sizes="16x16"> 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300&display=swap" rel="stylesheet">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload', async: true %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= yield %>
-    <script>
-      $(function(){
-        $(".thank-card-like").on("click", function(){
-        var thank_card_id = $(this).data("id")
-
-        $.ajax({
-          url: "/thank_card/like/"+thank_card_id,
-          method: "GET"
-        }).done(function(res){
-            console.log(res)
-        })
-      })
-    })
-    </script>
+  <body style="background-color: #fafafa">
+      <%= yield %>
   </body>
 </html>

@@ -10,9 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_26_161348) do
+ActiveRecord::Schema.define(version: 2022_06_13_015324) do
 
-  create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.bigint "record_id", null: false
@@ -22,7 +25,7 @@ ActiveRecord::Schema.define(version: 2022_05_26_161348) do
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", charset: "utf8mb3", force: :cascade do |t|
+  create_table "active_storage_blobs", force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -34,13 +37,32 @@ ActiveRecord::Schema.define(version: 2022_05_26_161348) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "active_storage_variant_records", charset: "utf8mb3", force: :cascade do |t|
+  create_table "active_storage_variant_records", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "card_templates", charset: "utf8mb3", force: :cascade do |t|
+  create_table "activities", id: :serial, force: :cascade do |t|
+    t.string "trackable_type"
+    t.integer "trackable_id"
+    t.string "owner_type"
+    t.integer "owner_id"
+    t.string "key"
+    t.text "parameters"
+    t.string "recipient_type"
+    t.integer "recipient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type"
+    t.index ["owner_type", "owner_id"], name: "index_activities_on_owner"
+    t.index ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type"
+    t.index ["recipient_type", "recipient_id"], name: "index_activities_on_recipient"
+    t.index ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type"
+    t.index ["trackable_type", "trackable_id"], name: "index_activities_on_trackable"
+  end
+
+  create_table "card_templates", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
@@ -50,7 +72,17 @@ ActiveRecord::Schema.define(version: 2022_05_26_161348) do
     t.string "left"
   end
 
-  create_table "likes", charset: "utf8mb3", force: :cascade do |t|
+  create_table "comments", force: :cascade do |t|
+    t.bigint "thank_card_id"
+    t.bigint "user_id"
+    t.string "comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["thank_card_id"], name: "index_comments_on_thank_card_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "thank_card_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -60,25 +92,25 @@ ActiveRecord::Schema.define(version: 2022_05_26_161348) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
-  create_table "thank_cards", charset: "utf8mb3", force: :cascade do |t|
+  create_table "thank_cards", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "card_template_id", null: false
     t.string "message"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "name"
-    t.integer "total_likes_count"
+    t.bigint "user_take_thank_card_id", null: false
+    t.boolean "approved", default: false
     t.index ["card_template_id"], name: "index_thank_cards_on_card_template_id"
     t.index ["user_id"], name: "index_thank_cards_on_user_id"
+    t.index ["user_take_thank_card_id"], name: "index_thank_cards_on_user_take_thank_card_id"
   end
 
-  create_table "users", charset: "utf8mb3", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "address"
     t.date "birthday"
     t.string "gender"
-    t.integer "phone"
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -86,7 +118,9 @@ ActiveRecord::Schema.define(version: 2022_05_26_161348) do
     t.datetime "reset_sent_at"
     t.string "username"
     t.string "remember_digest"
-    t.boolean "admin"
+    t.boolean "active", default: false
+    t.boolean "admin", default: false
+    t.string "phone"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

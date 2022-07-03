@@ -1,27 +1,152 @@
-<%= render 'shared/header' %>
-
+<%= render 'shared/header_no_form' %>
 <div class="center-user">
-  <section class="profile">
-    <div class="profile-avatar">
-      <%= image_tag url_for(@user.image), style: 'width: 150px' if @user.image.present? %>
-    </div>
+  <div style="width:900px;display:flex;justify-content:center;margin:0 auto">
+    <section class="profile">
+      <div class="profile-avatar">
+        <% if @user.image.present? %>
+          <%= image_tag url_for(@user.image), style: 'width: 150px' %>
+        <% else %>
+          <%= image_tag 'default.png', style: 'width: 150px' %>
+        <% end %>
+      </div>
 
-    <div class="profile-right">
-      <div class="profile-title">
-        <h3><%= @user.username %></h3>
+      <div class="profile-right">
+        <div class="profile-title">
+          <h3 style='font-size: 28px !important;font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;/*! font-family: inherit; */font-weight: bold;font-style: inherit;font-size: inherit;color: inherit;'><%= @user.name %></h3>
 
-        <div class="profile-submit">
-          <%= link_to "Edit Profile", edit_user_path(@user) , class: 'edit' %>  
+          <% if current_user.admin? && @user.admin %>
+            <i data-visualcompletion="css-img" aria-label="Tài khoản đã xác minh" role="img" style="background-image: url(&quot;https://static.xx.fbcdn.net/rsrc.php/v3/yG/r/AIv5-9MmZfT.png&quot;); background-position: -85px -109px; background-size: auto; width: 12px; height: 12px; background-repeat: no-repeat; display: inline-block; margin-left: 10px"></i>
+          <% end %>
+          <% if current_user?(@user) %>
+            <div class="profile-submit">
+              <%= link_to "プロファイル編集", edit_user_path(@user) , class: 'edit', style: "font-family: -apple-system,system-ui,BlinkMacSystemFont, 'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;" %>  
+            </div>
+
+            <div style="margin: 0 14px;display: flex;align-items: center;">
+              <svg aria-label="Tùy chọn" class="_ab6-" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" fill="none" r="8.635" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle><path d="M14.232 3.656a1.269 1.269 0 01-.796-.66L12.93 2h-1.86l-.505.996a1.269 1.269 0 01-.796.66m-.001 16.688a1.269 1.269 0 01.796.66l.505.996h1.862l.505-.996a1.269 1.269 0 01.796-.66M3.656 9.768a1.269 1.269 0 01-.66.796L2 11.07v1.862l.996.505a1.269 1.269 0 01.66.796m16.688-.001a1.269 1.269 0 01.66-.796L22 12.93v-1.86l-.996-.505a1.269 1.269 0 01-.66-.796M7.678 4.522a1.269 1.269 0 01-1.03.096l-1.06-.348L4.27 5.587l.348 1.062a1.269 1.269 0 01-.096 1.03m11.8 11.799a1.269 1.269 0 011.03-.096l1.06.348 1.318-1.317-.348-1.062a1.269 1.269 0 01.096-1.03m-14.956.001a1.269 1.269 0 01.096 1.03l-.348 1.06 1.317 1.318 1.062-.348a1.269 1.269 0 011.03.096m11.799-11.8a1.269 1.269 0 01-.096-1.03l.348-1.06-1.317-1.318-1.062.348a1.269 1.269 0 01-1.03-.096" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="profile-post" style="display: flex">
+          <p><strong> <%= @thank_cards_approved.count %> </strong>Post</p>
+          <p style="margin: 0 20px"><strong> <%= @thank_cards_approved.count %> </strong>Follower</p>
+          <p>Following<strong> <%= @thank_cards_approved.count %> </strong>users</p>
+        </div>
+
+        <div class="profile-username">
+          <p>"<%= @user.username %>"</p>
         </div>
       </div>
+    </section>
+  </div>
+  <div id="container">
+    <div class="nav-tab" style="width: 100%; margin-top: 34px; display: flex; justify-content: center; cursor: pointer; position:relative">
+      <input id="tab-1" type="radio"  name="tab-group" checked="checked" />
+      <label for="tab-1" class="post-small" style="width: 140px;text-align: center;position: relative; font-weight: 900; margin: 14px 10px; color: #909090; cursor: pointer">
+        <svg aria-label="" class="_8-yf5 " color="#262626" fill="#262626" height="12" role="img" viewBox="0 0 24 24" width="12"><rect fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="18" x="3" y="3"></rect><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="9.015" x2="9.015" y1="3" y2="21"></line><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="14.985" x2="14.985" y1="3" y2="21"></line><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="21" x2="3" y1="9.015" y2="9.015"></line><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="21" x2="3" y1="14.985" y2="14.985"></line></svg>
+        投稿
+        (<%= @thank_cards_approved.count %>)
+      </label>
+      
+      <% if current_user.admin? && current_user?(@user) %>
+        <input id="tab-2" type="radio"  name="tab-group" />
+        <label for="tab-2" class="post-small" style="width: 140px;text-align: center;position: relative; font-weight: 900; margin: 14px 10px; color: #909090; cursor: pointer">
+          <span class="material-icons" style="font-size: 12px">person_add</span>
+          ユーザー
+        </label>
 
-      <div class="profile-post">
-        <p><strong> 1 </strong> bai viet</p>
-      </div>
+        <input id="tab-3" type="radio"  name="tab-group" />
+        <label for="tab-3" class="post-small" style="width: 140px;text-align: center;position: relative; font-weight: 900; margin: 14px 10px; color: #909090; cursor: pointer">
+          <span class="material-icons" style="font-size: 12px">playlist_add</span>
+          テンプレート
+        </label>
 
-      <div class="profile-username">
-        <p>"<%= @user.name %>"</p>
-      </div>
+        <input id="tab-4" type="radio"  name="tab-group" />
+        <label for="tab-4" class="post-small" style="width: 140px;text-align: center;position: relative; font-weight: 900; margin: 14px 10px; color: #909090; cursor: pointer">
+          <span class="material-icons" style="font-size: 12px">file_upload</span>
+          輸入
+        </label>
+
+        <input id="tab-5" type="radio"  name="tab-group" />
+        <label for="tab-5" class="post-small" style="width: 140px;text-align: center;position: relative; font-weight: 900; margin: 14px 10px; color: #909090; cursor: pointer">
+          <span class="material-icons" style="font-size: 12px">verified_user</span>
+          承認済み
+          (<%= @thank_cards_not_approved.count %>)
+        </label>
+      <% end %>
+
+      <div id="post-list-small" style="top: 70px;position:absolute">
+        <div id="content-1" style="display: flex; flex-wrap: wrap; justify-content: space-between; cursor: pointer; width:100%">
+          <% @thank_card_by_user.each do |card| %>
+            <% if card.approved? %>
+              <%= link_to card do %>
+                <div style="width: 470px; height: 293px; background-image: url(<%= url_for(card.card_template.background) %>); background-size: cover; background-position: center; margin-bottom: 20px; box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);"></div>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+
+        <% if current_user.admin? %>
+          <div id="content-2" style="display: flex; flex-wrap: wrap; justify-content: center;align-items:center; cursor: pointer;width:100%;height:300px">
+            <div class="content-2-item" style="display:flex;align-items:center;flex-direction: column">
+              <%= link_to new_user_path do %>
+                <div class="content-2-icon">
+                  <span class="material-icons" style="font-size: 64px; color: #ccc">person_add</span>
+                </div>
+              <% end %>
+              <h3 style="margin: 20px 0;font-family: 'Joan', serif;font-size: 2rem">Add User</h3>
+              <p style="text-align: center;max-width: 350px;font-family: 'Joan', serif;">アカウントを作成するときは、パスワードを選択して安全に保つことが重要な手順であることを忘れないでください。 パスワードがわからないため、パスワードを忘れたり紛失したりした場合、パスワードを回復することはできません。</p>
+            </div>
+          </div>
+
+          <div id="content-3" style="display: flex; flex-wrap: wrap; justify-content: space-around;align-items:center; cursor: pointer;width:100%;height:300px">
+            <div class="content-2-item" style="display:flex;align-items:center;flex-direction: column">
+              <%= link_to new_card_template_path do %>
+                <div class="content-2-icon">
+                  <span class="material-icons" style="font-size: 64px; color: #ccc">playlist_add</span>
+                </div>
+              <% end %>
+              <h3 style="margin: 20px 0;font-family: 'Joan', serif;font-size: 2rem">Add Template</h3>
+              <p style="text-align: center;max-width: 350px;font-family: 'Joan', serif;">テンプレートには、スタイル、定型句、オートコレクトエントリ、マクロ、ツールバー、カスタムメニュー設定、およびショートカットキーを保存できます。 テンプレートをロードすると、他のテンプレートに基づいてドキュメントを操作するときに使用できるグローバルテンプレートとして使用できるようになります。</p>
+            </div>
+
+            <div class="content-2-item" style="display:flex;align-items:center;flex-direction: column">
+              <%= link_to card_templates_path do %>
+                <div class="content-2-icon">
+                  <span class="material-icons" style="font-size: 64px; color: #ccc">list</span>
+                </div>
+              <% end %>
+              <h3 style="margin: 20px 0;font-family: 'Joan', serif;font-size: 2rem">List Template</h3>
+              <p style="text-align: center;max-width: 350px;font-family: 'Joan', serif;">テンプレートは、列、色の書式設定、およびデータ構造を含む事前構成されたレイアウトを使用してリストを作成するのに役立ちます。 重要なデータを強調表示するように書式を変更したり、フォームを構成して一目で詳細を確認したり、リマインダーを設定して最新の状況を把握したりすることで、状況に合わせて各リストをカスタマイズできます。</p>
+            </div>
+          </div>
+
+          <div id="content-4" style="display: flex; flex-wrap: wrap; justify-content: center;align-items:center; cursor: pointer;width:100%;height:300px">
+            <div class="content-2-item" style="display:flex;align-items:center;flex-direction: column">
+              <%= link_to imports_path do %>
+                <div class="content-2-icon">
+                  <span class="material-icons" style="font-size: 64px; color: #ccc">file_upload</span>
+                </div>
+              <% end %>
+              <h3 style="margin: 20px 0;font-family: 'Joan', serif;font-size: 2rem">Import CSV</h3>
+              <p style="text-align: center;max-width: 350px;font-family: 'Joan', serif;">CSVは、大量のデータを保存するために使用される、普遍的で非常に用途の広いデータ形式です。 各Memgraphデータベースインスタンスには、mg_import_csvと呼ばれるCSVインポートツールが含まれています。 CSVインポートツールは、データベースへのデータの最初の一括取り込みに使用する必要があります。 取り込み時に、CSVインポーターは、データベースが次回の起動時に状態を回復するために使用するスナップショットを作成します。</p>
+            </div>
+          </div>
+
+          <div id="content-5" style="display: flex; flex-wrap: wrap; justify-content: center;align-items:center; cursor: pointer;width:100%;height:300px">
+            <div class="content-2-item" style="display:flex;align-items:center;flex-direction: column">
+              <%= link_to approved_index_thank_cards_path do %>
+                <div class="content-2-icon">
+                  <span class="material-icons" style="font-size: 64px; color: #ccc">verified_user</span>
+                </div>
+              <% end %>
+              <h3 style="margin: 20px 0;font-family: 'Joan', serif;font-size: 2rem">Approved Post</h3>
+              <p style="text-align: center;max-width: 350px;font-family: 'Joan', serif;">明確なワンクリックの承認により、投稿がいつうまくいくかを確実に知ることができます。 誰が投稿を承認したか、ワークフローをいつ透明かつ効率的に保つかを確認できます。 それらの無限の電子メールスレッドを排除し、重要なフィードバックを見失うことはありません。</p>
+            </div>
+          </div>
+        <% end %>
+      </div>  
     </div>
-  </section>
+  </div>
 </div>

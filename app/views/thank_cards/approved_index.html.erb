@@ -1,0 +1,22 @@
+<%= render 'shared/header_no_form' %>
+<div class="center" style="width: 900px">
+  <div class="card-list">
+    <h1>List all card not approved:</h1>
+    <% if @thank_cards.present? %>
+      <div style="display: flex;flex-wrap: wrap;justify-content: space-between;">
+        <% @thank_cards.each do |card| %>
+          <div style="width: 100%;margin-bottom: 10px">
+            <%= link_to card, style:'width:100%;display:block;margin-bottom: 20px' do %>
+              <div class="card-list-item" style="background-image: url( <%= url_for(card.card_template.background) %> );border-radius: 10px"></div>
+            <% end %>
+            <%= link_to "Approved", approved_thank_card_path(card), method: :put, style: "text-decoration: none;padding: 10px;border: 1px solid #ccc;color: #fff;background-color: #0095f6;border-radius: 10px;" %>
+            <%= link_to 'Reject', approved_destroy_thank_card_path(card), method: :delete, data: { confirm: "Are you sure reject post by #{ card.user.name } " }, class: 'btn_delete-users',style: 'text-decoration: none;color: #fff;border: 1px solid #ccc;padding: 10px;border-radius: 10px;background-color: red;' %>
+          </div>  
+        <% end %>
+      </div>
+    <% else %>
+      <div style="margin: 10px 0"><i>No Thanks card</i></div>
+    <% end %>
+    <%= will_paginate @thank_cards, renderer: BootstrapPagination::Rails %>
+  </div>
+</div>

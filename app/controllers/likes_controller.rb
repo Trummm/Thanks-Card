@@ -1,23 +1,26 @@
 class LikesController < ApplicationController
+  before_action :find_thank_card, only: %i[create]
+
   def create
-    @like = current_user.likes.new(thank_card_id: params[:thank_card_id], user_id: current_user.id)
-    @thank_card_id = params[:thank_card_id]
-    existing_like = Like.where(thank_card_id: params[:thank_card_id], user_id: current_user.id)
+    @like = current_user.likes.find_or_initialize_by(thank_card_id: @thank_card.id)
 
     respond_to do |format|
       format.js{
-        if existing_like.any?
-          existing_like.first.destroy
-          @success = false
-        elsif @like.save
+        if @like.new_record?
+          @like.save
           @success = true
         else
+          @like.destroy
           @success = false
         end
-         
-        @thank_card_likes = ThankCard.find(@thank_card_id).total_likes_count
-        render "thank_cards/like"
+                 
+        render "thank_cards/like.js.erb"
       }
     end
+  end
+
+  private 
+  def find_thank_card
+    @thank_card = ThankCard.find(params[:thank_card_id])
   end
 end

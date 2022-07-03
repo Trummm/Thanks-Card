@@ -1,49 +1,250 @@
-<div class="feed-section_left">
-  <div class="above-section">
-    <div class="title">
-      <div class="title-avatar">
-        <%= image_tag(thank_card.user.image, width: '42px') if thank_card.user.image.present? %>
+<style>
+  .drop-input-checked-detail-<%= thank_card.id %>:checked ~ .hide-list-detail-<%= thank_card.id %>{
+    display: block !important;
+    transform-origin: top left !important;
+    animation: headerNotifyGrowth ease-in .2s;
+  }
+
+  .drop-input-checked-4-<%= thank_card.id %>:checked ~ .modal-<%= thank_card.id %> {
+    display: block !important;
+  }
+  <% thank_card.comments.each do |comment| %>
+    .drop-input-checked-detail-<%= comment.id %>:checked ~ .hide-list-detail-<%= comment.id %>{
+      display: block !important;
+      transform-origin: calc(100% - 20px) top;
+      animation: headerNotifyGrowth ease-in .2s;
+    }
+  <% end %>
+</style>
+  <div class="feed-section_left">
+    <div class="above-section">
+      <div class="title" style="justify-content: space-between;">
+        <div style="display: flex; align-items: center;">
+          <%= link_to user_path(thank_card.user), style:"text-decoration: none;display: flex; align-items: center;" do %>
+          <div class="title-avatar" style="position: relative;display: flex;align-items: center;justify-content: center;">
+            <% if thank_card.user.image.present? %>
+              <%= image_tag(thank_card.user.image, width: '34px') %>
+            <% else %>
+              <%= image_tag 'default.png', style: 'width: 34px; height: 34px' %>
+            <% end %>
+          </div>
+            <h4 class="title-text">
+              <%= thank_card.user.name %>
+              <% if thank_card.user.admin? %>
+                <i data-visualcompletion="css-img" aria-label="Tài khoản đã xác minh" role="img" style="background-image: url(&quot;https://static.xx.fbcdn.net/rsrc.php/v3/yG/r/AIv5-9MmZfT.png&quot;); background-position: -85px -109px; background-size: auto; width: 12px; height: 12px; background-repeat: no-repeat; display: inline-block;"></i>
+              <% end %>
+            </h4>
+          <% end %>
+
+          <p style="margin-left: 20px; margin-right: 20px;"><i>おかげで：</i></p>
+
+          <%= link_to user_path(thank_card.user_take_thank_card), style:"text-decoration: none;display: flex; align-items: center;" do %>
+            <div class="title-avatar-to" style="position: relative;display: flex;align-items: center;justify-content: center;">
+              <% if thank_card.user_take_thank_card.image.present? %>
+                <%= image_tag(thank_card.user_take_thank_card.image, width: '20px') %>
+              <% else %>
+                <%= image_tag 'default.png', style: 'width: 34px; height: 34px' %>
+              <% end %>
+            </div>
+            <h4 class="title-text"><i><%= thank_card.user_take_thank_card.name %></i></h4>
+          <% end %>
+        </div>
+
+        <label class="drop-detail" style="position: relative; cursor: pointer" for="drop-input-detail-<%= thank_card.id %>">
+          <svg aria-label="Tùy chọn khác" class="_8-yf5 " color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" r="1.5"></circle><circle cx="6" cy="12" r="1.5"></circle><circle cx="18" cy="12" r="1.5"></circle></svg>
+            
+          <input id="drop-input-detail-<%= thank_card.id %>" class="drop-input-checked-detail-<%= thank_card.id %>" hidden="" type="checkbox" />
+
+          <ul style="list-style: none; display: none;width: 130px; position: absolute; z-index: 999; background-color: #fff; list-style: none; padding: 10px; box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3); border-radius: 10px;" class="hide-list-detail-<%= thank_card.id %>">
+            <%= link_to thank_card, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn_delete-users', style: "text-decoration: none; color: black; display: block; margin: 6px 0" do %>
+              <li>Delete</li>
+            <% end %>
+
+            <label for="drop-input-4-<%= thank_card.id %>">
+              <li>Detail</li>
+            </label>
+
+            <%= link_to edit_thank_card_path(thank_card), class: 'btn_delete-users', style: "text-decoration: none; color: black; display: block; margin: 6px 0" do %>
+              <li>Edit</li>
+            <% end %>
+          </ul>
+        </label>
       </div>
-      <h4 class="title-text"><%= thank_card.user.name %></h4>
 
-      <p style="margin-left: 20px; margin-right: 20px;"><i>Thanks To:</i></p>
-
-      <div class="title-avatar-to">
-        <%= image_tag(thank_card.user.image, width: '20px') if thank_card.user.image.present? %>
-      </div>
-      <h4 class="title-text"><i><%= thank_card.user.name %></i></h4>
-    </div>
-
-    <div class="thankscard">
-      <div class="card-list-item-show" style="background-image: url( <%= url_for(thank_card.card_template.background) %> )">
-        <div class="card-list-inside-show" style="top: <%= thank_card.card_template.top %>px; right: <%= thank_card.card_template.right %>px; bottom: <%= thank_card.card_template.bottom %>px; left: <%= thank_card.card_template.left %>px">
-          <%= thank_card.message %>
+      <div class="thankscard">
+        <div class="card-list-item-show" style="background-image: url( <%= url_for(thank_card.card_template.background) %> )">
+          <div class="card-list-inside-show" style="top: <%= thank_card.card_template.top %>px; right: <%= thank_card.card_template.right %>px; bottom: <%= thank_card.card_template.bottom %>px; left: <%= thank_card.card_template.left %>px">
+            <%= thank_card.message %>
+          </div>
         </div>
       </div>
+
+      <div class="icons-feed">
+        <svg aria-label="like" class="_8-yf5 like-<%= thank_card.id %> <%= 'active' if thank_card_like_by_user?(thank_card.id) %> thank-card-like" data-id="<%= thank_card.id %>" color="#8e8e8e" fill="#8e8e8e" height="28" role="img" viewBox="0 0 48 48" width="28"><path d="M34.6 3.1c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5s1.1-.2 1.6-.5c1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"></path></svg>
+
+        <label for="drop-input-4-<%= thank_card.id %>" style="margin-top: 10px;margin-left: 16px;cursor:pointer">
+          <svg aria-label="comment" class="_8-yf5 " color="#252525" fill="#8e8e8e" height="28" role="img" viewBox="0 0 24 24" width="28"><path d="M20.656 17.008a9.993 9.993 0 10-3.59 3.615L22 22z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
+        </label>
+
+        <input id ="drop-input-4-<%= thank_card.id %>" class="drop-input-checked-4-<%= thank_card.id %>" hidden type="checkbox"/>
+
+          <div class="modal-<%= thank_card.id %>" style="position: fixed;top: 0;right: 0;bottom: 0;left: 0;z-index: 99999;display:none">
+            <label for="drop-input-4-<%= thank_card.id %>" class="mask"></label>
+
+            <label for="drop-input-4-<%= thank_card.id %>" class="material-icons" style="float: right;color: #fff;position: relative;z-index: 999999999;font-size: 2.4rem;cursor: pointer;">close</label>
+
+            <div class="center-show" style="width:1400px;margin-top: 140px; max-height: 700px; display: flex; border-radius: 10px;z-index:999999;position:relative">
+              <div class="feed-section_left" style="flex: 1; margin: 0; width: 684px; border: none !important; border-top-left-radius: 10px;border-bottom-right-radius: 0">
+                <div class="above-section" style="position: inherit">
+
+                  <div class="thankscard">
+                    <div class="card-list-item-show" style="background-image: url( <%= url_for(thank_card.card_template.background) %> );border: none; border-top-left-radius:10px">
+                      <div class="card-list-inside-show" style="top: <%= thank_card.card_template.top %>px; right: <%= thank_card.card_template.right %>px; bottom: <%= thank_card.card_template.bottom %>px; left: <%= thank_card.card_template.left %>px; font-size: 1.4rem">
+                        <%= thank_card.message %>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="icons-feed">
+                    <svg aria-label="like" class="_8-yf5 like-<%= thank_card.id %> <%= 'active' if thank_card_like_by_user?(thank_card.id) %> thank-card-like" data-id="<%= thank_card.id %>" color="#8e8e8e" fill="#8e8e8e" height="28" role="img" viewBox="0 0 48 48" width="28"><path d="M34.6 3.1c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5s1.1-.2 1.6-.5c1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"></path></svg>
+
+                    <%= link_to '#' do %>
+                      <svg aria-label="comment" class="_8-yf5 " color="#8e8e8e" fill="#8e8e8e" height="28" role="img" viewBox="0 0 24 24" width="28"><path d="M20.656 17.008a9.993 9.993 0 10-3.59 3.615L22 22z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
+                    <% end %>
+                    <svg aria-label="share" class="_8-yf5 " color="#8e8e8e" fill="#8e8e8e" height="28" role="img" viewBox="0 0 24 24" width="28"><line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="22" x2="9.218" y1="3" y2="10.083"></line><polygon fill="none" points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></polygon></svg>
+                  </div>
+
+                  <div class="like" id="thank_card-<%= thank_card.id %>-likes">
+                    <%= thank_card.likes.count %> likes
+                  </div>
+
+                  <div class="title-time">
+                    Posted <%= time_ago_in_words(thank_card.created_at) %> ago.
+                  </div>  
+                </div>
+              </div>
+
+              <div class="show-right" style="flex: 2; border-left: 1px solid #efefef;border-top-left-radius: none;border-top-right-radius: 10px;border-bottom-right-radius: 10px;">
+
+              <div class="title-show" style="padding: 8px 16px">
+                <div class="title-avatar" style="position: relative;display: flex;align-items: center;justify-content: center;">
+                  <%= image_tag(thank_card.user.image, width: '42px', style: 'width: 34px; height: 34px') if thank_card.user.image.present? %>
+                </div>
+                <h4 class="title-text">
+                  <%= thank_card.user.name %>
+                  <% if thank_card.user.admin? %>
+                    <i data-visualcompletion="css-img" aria-label="Tài khoản đã xác minh" role="img" style="background-image: url(&quot;https://static.xx.fbcdn.net/rsrc.php/v3/yG/r/AIv5-9MmZfT.png&quot;); background-position: -85px -109px; background-size: auto; width: 12px; height: 12px; background-repeat: no-repeat; display: inline-block;"></i>
+                  <% end %>
+                </h4>
+
+                <p style="margin-left: 10px; margin-right: 10px;"><i>おかげで：</i></p>
+
+                <%= link_to user_path(thank_card.user_take_thank_card), style: "display:flex;align-items: center;text-decoration:none" do %>
+                  <div class="title-avatar-to" style="position: relative;display: flex;align-items: center;justify-content: center;">
+                    <% if thank_card.user_take_thank_card.image.present? %>
+                      <%= image_tag(thank_card.user_take_thank_card.image, width: '10px') %>
+                    <% else %>
+                      <%= image_tag 'default.png', style: 'width: 34px; height: 34px' %>
+                    <% end %>
+                  </div>
+                  <h5 class="title-text"><i><%= thank_card.user_take_thank_card.name %></i></h5>
+                <% end %>
+              </div>
+
+                <div id="comment__user" class="comment-user" style="padding: 4px 16px;overflow-y: auto;scrollbar-width: none;flex: 15; border-radius: 10px">
+                  <% thank_card.comments.each do |comment| %>
+                    <div class="comment-user-list" style="display: flex; margin: 14px 0; justify-content: space-between">
+                      <div style="display: flex">
+                        <div class="comment-user-img" style="width: 32px; height: 32px">
+                          <% if comment.user.image.present? %>
+                            <%= image_tag(comment.user.image, width: '32px', style: "border-radius: 50%; width: 32px; height: 32px") %>
+                          <% else %>
+                            <%= image_tag 'default.png', style: 'width: 32px; height: 32px; border-radius: 50%' %>
+                          <% end %>
+                        </div>
+                        <div style="margin-left: 10px;max-width: 410px">
+                          <div class="comment-user-name" style="margin: 0; display: inline;font-family: 'Roboto', sans-serif;font-weight: 400">
+                            <strong>
+                              <%= comment.user.name %>
+                              <% if comment.user.admin? %>
+                                <i data-visualcompletion="css-img" aria-label="Tài khoản đã xác minh" role="img" style="margin: 0 4px;background-image: url(&quot;https://static.xx.fbcdn.net/rsrc.php/v3/yG/r/AIv5-9MmZfT.png&quot;); background-position: -85px -109px; background-size: auto; width: 12px; height: 12px; background-repeat: no-repeat; display: inline-block;"></i>
+                              <% end %>
+                            </strong>
+                          </div>
+                          <div class="comment-user-text" style="display: inline">
+                            <p style="display: inline; work;word-break: break-all;font-family: 'Montserrat', sans-serif;"><%= comment.comment %></p>
+                            <% if comment.image.present? %>
+                              <div style="width: 615px"><%= image_tag(comment.image, style: "width: 100%") %></div>
+                            <% end %>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label class="drop-detail" style="position: relative; cursor: pointer;" for="drop-input-detail-<%= comment.id %>">
+                          <svg aria-label="Tùy chọn khác" class="_8-yf5 " color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" r="1.5"></circle><circle cx="6" cy="12" r="1.5"></circle><circle cx="18" cy="12" r="1.5"></circle></svg>
+                            
+                          <input id="drop-input-detail-<%= comment.id %>" class="drop-input-checked-detail-<%= comment.id %>" hidden="" type="checkbox" />
+
+                          <ul style="list-style: none; display: none;width: 130px; position: absolute; z-index: 999; background-color: #fff; list-style: none; padding: 10px; box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3); border-radius: 10px;right: 27px; top: 0;" class="hide-list-detail-<%= comment.id %>">
+                            <%= link_to comment, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn_delete-users', style: "text-decoration: none; color: black; display: block; margin: 6px 0" do %>
+                              <li>Delete</li>
+                            <% end %>
+                            <%= link_to edit_comment_path(comment), class: 'btn_delete-users', style: "text-decoration: none; color: black; display: block; margin: 6px 0" do %>
+                              <li>Edit</li>
+                            <% end %>
+                          </ul>
+                        </label>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+
+              <div class="comment">
+                <div class="comment-flex">
+                  <%= form_with model: @comment, local: true do |f| %>
+                    <span class="material-icons">sentiment_satisfied_alt</span>
+                    <%= f.hidden_field :thank_card_id, value: thank_card.id %>
+                    <%= f.text_field :comment, placeholder: "Add Comment" %>
+                    <%= f.file_field :image, id: 'upload-show', hidden: true, accept: "image/jpeg,image/gif,image/png"%>
+                    <label for="upload-show" class="material-icons" style="color: #ccc;cursor:pointer">photo_camera</label>
+                    <%= f.submit "Add", class: 'add'%>
+                  <% end %>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <svg aria-label="share" class="_8-yf5 " color="#8e8e8e" fill="#8e8e8e" height="28" role="img" viewBox="0 0 24 24" width="28"><line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="22" x2="9.218" y1="3" y2="10.083"></line><polygon fill="none" points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></polygon></svg>
+      </div>
+
+      <div class="like" id="thank_card-<%= thank_card.id %>-likes-2">
+        <%= thank_card.likes.count %> likes
+      </div>
+
+      <% if thank_card.comments.count > 0 %>
+        <label for="drop-input-4-<%= thank_card.id %>" class="comment-count" style="display:block;cursor:pointer">
+            View all <%= thank_card.comments.count %> comments
+        </label>
+      <% end %>
+
+      <div class="title-time">
+        Posted <%= time_ago_in_words(thank_card.created_at) %> ago.
+      </div>  
     </div>
 
-    <div class="icons-feed">
-      <svg aria-label="like" class="_8-yf5 like-<%= thank_card.id %> <%= 'active' if thank_card_like_by_user?(thank_card.id) %> thank-card-like" data-id="<%= thank_card.id %>" color="#8e8e8e" fill="#8e8e8e" height="28" role="img" viewBox="0 0 48 48" width="28"><path d="M34.6 3.1c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5s1.1-.2 1.6-.5c1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"></path></svg>
-
-      <svg aria-label="comment" class="_8-yf5 " color="#8e8e8e" fill="#8e8e8e" height="28" role="img" viewBox="0 0 24 24" width="28"><path d="M20.656 17.008a9.993 9.993 0 10-3.59 3.615L22 22z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
-
-      <svg aria-label="share" class="_8-yf5 " color="#8e8e8e" fill="#8e8e8e" height="28" role="img" viewBox="0 0 24 24" width="28"><line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="22" x2="9.218" y1="3" y2="10.083"></line><polygon fill="none" points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></polygon></svg>
+    <div class="comment">
+      <div class="comment-flex">
+        <%= form_with model: @comment, local: true do |f| %>
+          <span>
+            <svg aria-label="Biểu tượng cảm xúc" class="_ab6-" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><path d="M15.83 10.997a1.167 1.167 0 101.167 1.167 1.167 1.167 0 00-1.167-1.167zm-6.5 1.167a1.167 1.167 0 10-1.166 1.167 1.167 1.167 0 001.166-1.167zm5.163 3.24a3.406 3.406 0 01-4.982.007 1 1 0 10-1.557 1.256 5.397 5.397 0 008.09 0 1 1 0 00-1.55-1.263zM12 .503a11.5 11.5 0 1011.5 11.5A11.513 11.513 0 0012 .503zm0 21a9.5 9.5 0 119.5-9.5 9.51 9.51 0 01-9.5 9.5z"></path></svg>
+          </span>
+          <%= f.hidden_field :thank_card_id, value: thank_card.id %>
+          <%= f.text_field :comment, placeholder: "Add Comment" %>
+          <%= f.submit "Add", class: 'add'%>
+        <% end %>
+      </div>
     </div>
-
-    <div class="like" id="thank_card-<%= thank_card.id %>-likes">
-      <%= thank_card.total_likes_count %> likes
-    </div>
-
-    <div class="title-time">
-      Posted <%= time_ago_in_words(thank_card.created_at) %> ago.
-    </div>  
   </div>
-
-  <div class="comment">
-    <div class="comment-flex">
-      <span class="material-icons">sentiment_satisfied_alt</span>
-      <input type="text" placeholder="Add Comment" />
-      <a href="">Add</a>
-    </div>
-  </div>
-</div>

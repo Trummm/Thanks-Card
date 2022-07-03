@@ -1,9 +1,9 @@
-<%= render 'shared/header' %>
+<%= render 'shared/header_no_form' %>
 <div class="post-main">
   <%= form_with model: @thank_card, class: 'post' do |f| %>
     <div class="to-member">
       <%= f.label :To, class: 'to-member-span' %>
-      <%= f.collection_select :user_id, User.all, :id, :name, prompt: true %>
+      <%= f.collection_select :user_take_thank_card_id, User.where("id != #{current_user.id}"), :id, :name, prompt: true %>
     </div>
 
     <div class="template">

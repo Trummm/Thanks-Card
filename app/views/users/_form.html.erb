@@ -1,0 +1,28 @@
+<div class="center-user">
+  <%= form_with model: @user, class: 'card' do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <div style="display: flex;justify-content:center">
+      <%= image_tag('default.png', style: 'width: 120px;height: 120px;border-radius: 50%;') %>
+    </div>
+
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "custom-file-input" %>
+
+    <%= f.label :email %>
+    <%= f.text_field :email, class: 'form-control' %>
+
+    <%= f.label :password %>
+    <%= f.password_field :password, class: "custom-file-input" %>
+
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+    <%= f.label :admin %>
+    <%= f.check_box :admin, class: 'form-control' %>
+
+    <%= f.label :active %>
+    <%= f.check_box :active, class: 'form-control' %>
+
+    <%= f.submit yield(:text_btn), class: 'btn btn-primary' %>
+  <% end %>
+</div>

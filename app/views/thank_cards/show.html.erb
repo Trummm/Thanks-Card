@@ -1,29 +1,81 @@
-<%= render 'shared/header' %>
-<div class="center-card">
-  <div class="main-show">
-    <div class="feed-section_left" style="flex: 0; flex-direction: row; margin: 0; border: none">
-      <div class="above-section">
-          <div class="thankscard">
-            <div class="card-list-item-show" style="background-image: url( <%= url_for(@thank_card.card_template.background) %> )">
-            <div class="card-list-inside-show" style="top: <%= @thank_card.card_template.top %>px; right: <%= @thank_card.card_template.right %>px; bottom: <%= @thank_card.card_template.bottom %>px; left: <%= @thank_card.card_template.left %>px">
-              <%= @thank_card.message %>
-            </div>
+<%= render 'shared/header_no_form' %>
+<%= javascript_pack_tag 'like_ajax' %>
+<div class="center-show" style="width:1400px;margin-top: 200px; max-height: 520px; display: flex; border-radius: 10px; border: 1px solid #efefef;">
+  <div class="feed-section_left" style="flex: 1; margin: 0; width: 684px; border-radius: none; border: none">
+    <div class="above-section" style="position: inherit">
+
+      <div class="thankscard">
+        <div class="card-list-item-show" style="background-image: url( <%= url_for(@thank_card.card_template.background) %> );border: none">
+          <div class="card-list-inside-show" style="top: <%= @thank_card.card_template.top %>px; right: <%= @thank_card.card_template.right %>px; bottom: <%= @thank_card.card_template.bottom %>px; left: <%= @thank_card.card_template.left %>px; font-size: 1.4rem">
+            <%= @thank_card.message %>
           </div>
-      </div>
-    </div>
-    <div class="title-right">
-      <div class="title-show">
-        <div class="title-avatar-show">
-          <%= image_tag(@thank_card.user.image, width: '42px') if @thank_card.user.image.present? %>
         </div>
-        <h4 class="title-text-show"><%= @thank_card.user.name %></h4>
       </div>
 
-      <div class="comment-show">
+      <div class="icons-feed">
+        <svg aria-label="like" class="_8-yf5 like-<%= @thank_card.id %> <%= 'active' if thank_card_like_by_user?(@thank_card.id) %> thank-card-like" data-id="<%= @thank_card.id %>" color="#8e8e8e" fill="#8e8e8e" height="28" role="img" viewBox="0 0 48 48" width="28"><path d="M34.6 3.1c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5s1.1-.2 1.6-.5c1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"></path></svg>
+
+        <%= link_to thank_card_path(@thank_card) do %>
+          <svg aria-label="comment" class="_8-yf5 " color="#8e8e8e" fill="#8e8e8e" height="28" role="img" viewBox="0 0 24 24" width="28"><path d="M20.656 17.008a9.993 9.993 0 10-3.59 3.615L22 22z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
+        <% end %>
+        <svg aria-label="share" class="_8-yf5 " color="#8e8e8e" fill="#8e8e8e" height="28" role="img" viewBox="0 0 24 24" width="28"><line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="22" x2="9.218" y1="3" y2="10.083"></line><polygon fill="none" points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></polygon></svg>
       </div>
 
-      <div class="reaction">
+      <div class="like" id="thank_card-<%= @thank_card.id %>-likes">
+        <%= @thank_card.likes.count %> likes
+      </div>
+
+      <div class="title-time">
+        Posted <%= time_ago_in_words(@thank_card.created_at) %> ago.
+      </div>  
+    </div>
+  </div>
+
+  <div class="show-right" style="flex: 2; border-left: 1px solid #efefef; border-radius: 10px">
+
+    <div class="title-show" style="padding: 8px 16px">
+      <div class="title-avatar" style="position: relative;display: flex;align-items: center;justify-content: center;">
+        <%= image_tag(@thank_card.user.image, width: '42px', style: 'width: 34px; height: 34px') if @thank_card.user.image.present? %>
+      </div>
+      <h4 class="title-text">
+        <%= @thank_card.user.name %>
+        <% if @thank_card.user.admin? %>
+          <i data-visualcompletion="css-img" aria-label="Tài khoản đã xác minh" role="img" style="background-image: url(&quot;https://static.xx.fbcdn.net/rsrc.php/v3/yG/r/AIv5-9MmZfT.png&quot;); background-position: -85px -109px; background-size: auto; width: 12px; height: 12px; background-repeat: no-repeat; display: inline-block;"></i>
+        <% end %>
+      </h4>
+
+      <p style="margin-left: 10px; margin-right: 10px;"><i>おかげで：</i></p>
+
+      <%= link_to user_path(@thank_card.user_take_thank_card), style: "display:flex;align-items: center;text-decoration:none" do %>
+        <div class="title-avatar-to" style="position: relative;display: flex;align-items: center;justify-content: center;">
+          <% if @thank_card.user_take_thank_card.image.present? %>
+            <%= image_tag(@thank_card.user_take_thank_card.image, width: '10px') %>
+          <% else %>
+            <%= image_tag 'default.png', style: 'width: 34px; height: 34px' %>
+          <% end %>
+        </div>
+        <h5 class="title-text"><i><%= @thank_card.user_take_thank_card.name %></i></h5>
+      <% end %>
+    </div>
+
+    <div id="comment__user" class="comment-user" style="padding: 4px 16px;overflow-y: auto;scrollbar-width: none;flex: 15; border-radius: 10px">
+      <% @thank_card.comments.each do |comment| %>
+        <%= render 'comments/comment', comment: comment %>
+      <% end %>
+    </div>
+
+    <div class="comment">
+      <div class="comment-flex">
+        <%= form_with model: @comment, remote: true do |f| %>
+          <span class="material-icons">sentiment_satisfied_alt</span>
+          <%= f.hidden_field :thank_card_id, value: @thank_card.id %>
+          <%= f.text_field :comment, placeholder: "Add Comment" %>
+          <%= f.file_field :image, id: 'upload-show', hidden: true, accept: "image/jpeg,image/gif,image/png"%>
+          <label for="upload-show" class="material-icons" style="color: #ccc;cursor:pointer">photo_camera</label>
+          <%= f.submit "Add", class: 'add'%>
+        <% end %>
       </div>
     </div>
+
   </div>
 </div>

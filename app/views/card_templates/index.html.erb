@@ -1,0 +1,16 @@
+<% provide(:text_placeholder, 'Search card templates...') %>
+<% provide(:search, 'name_cont') %>
+<%= render 'shared/header' %>
+<div class="center" style="width: 900px">
+  <div class="card-list">
+      <h1>List all Templates:</h1>
+      <div class="card-list" style="display: flex;flex-wrap: wrap;justify-content: space-between;">
+        <% @card_templates.each do |card| %>
+          <%= link_to card, style:'width:100%' do %>
+            <div class="card-list-item" style="background-image: url( <%= url_for(card.background) %> )"></div>
+          <% end %>
+        <% end %>
+      </div>
+      <%= will_paginate @card_templates, renderer: BootstrapPagination::Rails %>
+  </div>
+</div>

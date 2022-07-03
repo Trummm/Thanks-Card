@@ -1,0 +1,6 @@
+<%= search_form_for @q, style: "display: flex;align-items: center;" do |f| %>
+  <%= f.search_field yield(:search), placeholder: "#{yield(:text_placeholder)}", style: "width: 280px;height: 38px;padding: 0 8px;background-color: #efefef;border: none;outline: none;border-radius: 10px;" %>
+  <%= button_to do %>
+    <span class="material-icons">search</span>
+  <% end %>
+<% end %>

@@ -8,18 +8,17 @@
             <div class="alert alert-<%= message_type %>"><%= message %></div>
           <% end %>
           <div class="input-1">
-            <%= f.email_field :email, class: 'below-text', placeholder: 'Enter Your Email' %>
+            <%= f.text_field :email, class: 'below-text', placeholder: 'Enter Your Email' %>
             <%= f.password_field :password, class: 'below-pass', placeholder: 'Password' %>
           </div>
 
           <div class="checkbox">
             <%= f.check_box :remember_me, id: 'checkbox' %>
-            <label for="checkbox">Remember for 30 days</label>
+            <label for="checkbox">Remember Me</label>
           </div>
 
           <div class="submit">
             <%= f.submit 'Sign in', class: 'login' %>
-            <%= f.submit 'Create New Account', class: 'create' %>
 	    
 	          <%= link_to "Forgot Password", new_password_reset_path , class: 'forgot' %>
 
@@ -39,3 +38,4 @@
       </div>
     </div>
   </div>
+<%= javascript_pack_tag 'eye' %>

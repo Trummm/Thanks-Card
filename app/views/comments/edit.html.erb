@@ -1,0 +1,10 @@
+<div style="width:100%;height:100vh;display:flex;align-items:center">
+  <div class="center-edit" style="width:1000px;margin:0 auto;align-items:center;justify-content:center;display:flex;height:50vh">
+    <%= form_with model: @comment, local: true, style: 'position:relative' do |f| %>
+      <%= f.text_field :comment, placeholder: "Add Comment",style: "width: 300px;padding: 10px;" %>
+      <%= f.file_field :image, id: 'upload-show', hidden: true, accept: "image/jpeg,image/gif,image/png"%>
+      <label for="upload-show" class="material-icons" style="color: #ccc;cursor:pointer;position: absolute;right: 40px;top: 6px;">photo_camera</label>
+      <%= f.submit "Add", class: 'add', style: "border: none;background: transparent;color: #0095f6;font-weight: 900;cursor:pointer"%>
+    <% end %>
+  </div>
+</div>

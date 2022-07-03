@@ -7,8 +7,6 @@ gem 'active_storage_validations', '0.8.2'
 
 gem 'figaro'
 
-gem 'bcrypt', '3.1.16'
-
 gem 'pry-rails'
 
 gem 'will_paginate'
@@ -17,17 +15,39 @@ gem 'will_paginate-bootstrap'
 
 gem 'bootstrap-sass', '~> 3.4.1'
 
-gem 'sass-rails', '>= 6'
+gem "roo"
+
+gem 'whenever', require: false
+
+gem 'hotwire-rails'
+
+gem 'redis', '~> 4.0'
+
+gem 'kaminari'
 
 gem 'jquery-rails'
 
+gem 'bullet', group: 'development'
+
+gem 'capistrano-rvm'
+
+gem "ransack"
+
 gem 'image_processing', '>= 1.2'
+
+gem 'loading_screen', '~> 0.2.3'
+
+gem "pagy", "~> 5.10"
+
+gem 'nprogress-rails'
 
 gem 'material_icons'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.5', '>= 6.1.5.1'
-# Use mysql as the database for Active Record
-gem 'mysql2', '~> 0.5'
+# Use postgresql as the database for Active Record
+gem 'pg'
+
+gem 'public_activity'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
@@ -41,7 +61,7 @@ gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '3.1.16'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

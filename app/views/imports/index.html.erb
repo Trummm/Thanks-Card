@@ -1,0 +1,13 @@
+<%= render 'shared/header_no_form' %>
+<div class="center">
+  <%= form_tag imports_path, multipart: true, style: 'width: 100%' do %>
+    <h4 style="text-align: center">Import Data</h4>
+    <label for="import" style="display: flex;justify-content: center;margin: 24px 0;">
+      <div style="border: 2px solid #ccc;padding: 20px;border-radius: 50%;">
+        <span class="material-icons" style="font-size: 6rem;color: #ccc;cursor: pointer;">file_upload</span>
+      </div>
+    </label>
+    <%= file_field_tag :file, id: 'import', hidden: true %>
+    <%= submit_tag "Import", style: 'margin: 0 !important' %>
+  <% end %>
+</div>

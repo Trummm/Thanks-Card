@@ -1,10 +1,27 @@
-<div class="feed-section_right-section-another">
-  <div class="feed-section_right-img-section">
-    <%= image_tag(user.image, width: '52px') if user.image.present? %>
-  </div>
+  <div class="feed-section_right-section-another">
+    <div class="feed-section_right-img-section" style="flex: 1">
+      <% if user.image.present? %>
+        <%= image_tag(user.image, width: '52px') %>
+      <% else %>
+        <%= image_tag 'default.png' %>
+      <% end %>
+    </div>
 
-  <div class="feed-section_right-text-section">
-    <p><%= user.name %></p>
-    <p><%= user.username %></p>
+    <%= link_to user_path(user), style: "flex: 8;text-decoration:none;color:black" do %>
+      <div class="feed-section_right-text-section" style="flex: 8">
+          <p>
+            <%= user.name %>
+            <% if user.admin? %>
+              <i data-visualcompletion="css-img" aria-label="Tài khoản đã xác minh" role="img" style="background-image: url(&quot;https://static.xx.fbcdn.net/rsrc.php/v3/yG/r/AIv5-9MmZfT.png&quot;); background-position: -85px -109px; background-size: auto; width: 12px; height: 12px; background-repeat: no-repeat; display: inline-block;"></i>
+            <% end %>
+          </p>
+          <p><%= user.username %></p>
+      </div>
+    <% end %>
+
+    <div id="btn-delete" style="flex: 1; display: none">
+      <% if current_user.admin? && !current_user?(user) %>
+        <%= link_to 'Delete', user, method: :delete, data: { confirm: "Are you sure delete #{ user.name } " }, class: 'btn_delete-users',style: 'text-decoration: none;color: black;border: 1px solid #ccc;padding: 10px;border-radius: 10px;background-color: #efefef;' %>
+      <% end %>
+    </div>
   </div>
-</div>

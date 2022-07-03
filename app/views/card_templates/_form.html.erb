@@ -1,9 +1,13 @@
 <%= form_with model: @card_template, class: 'card' do |f| %>
+  <%= f.label :background %>
+  <label for="background" style="border: 2px dashed #ccc;height: 200px;display: flex;align-items: center;justify-content: center;margin: 22px 0;cursor: pointer;color: #ccc;">
+    <span class="material-icons">file_upload</span>
+    Push image here
+  </label>
+  <%= f.file_field :background, class: 'form-control', id: 'background', hidden: true %>
+
   <%= f.label :name %>
   <%= f.text_field :name, class: "custom-file-input" %>
-
-  <%= f.label :background %>
-  <%= f.file_field :background, class: 'form-control' %>
 
   <%= f.label :top %>
   <%= f.text_field :top, class: "custom-file-input" %>

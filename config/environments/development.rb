@@ -11,6 +11,12 @@ Rails.application.configure do
   # Do not eager load code on boot.
   config.eager_load = false
 
+  config.after_initialize do
+    Bullet.enable = true # Bật bullet.
+    Bullet.alert = true # Hiển thị alert box trên browser.
+    Bullet.bullet_logger = true # Ghi lại log vào file bullet.log
+  end
+
   # Show full error reports.
   config.consider_all_requests_local = true
 

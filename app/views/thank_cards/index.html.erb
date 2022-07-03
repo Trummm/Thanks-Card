@@ -1,31 +1,68 @@
+<% provide(:text_placeholder, 'search filter thanks card by user...') %>
+<% provide(:search, 'user_name_cont') %>
 <%= render 'shared/header' %>
-<div class="feed-main">
-  <div class="feed">
-    <div class="feed-section-left-all">
-      <%= render @thank_cards %>  
-      <%= will_paginate @thank_cards, renderer: BootstrapPagination::Rails %>
-    </div>
-
+<%= javascript_pack_tag 'like_ajax' %>
+  <div class="feed-main">
+    <div class="feed" style="position:relative">
+      <div class="feed-section-left-all">
+        <div style="width:684px;border:1px solid #dbdbdb;height:100px;border-radius:10px;background-color:#fff;padding:10px 0;display:flex;align-items:center;overflow-x: auto;">
+          <ul style="list-style:none;display:flex;width: 100%;padding: 0 20px;align-items:center">
+            <div style="display:flex;align-items:center;flex-direction:column;justify-content:center;margin:0 10px;cursor:pointer">
+                  <div class="title-avatar" style="position: relative;display: flex;align-items: center;justify-content: center;width:66px;height:66px;background-color: #e7e9eb;border-radius: 50%;">
+                    <span class="material-icons" style="font-size: 1.4rem;font_weight:900">add</span>
+                  </div>
+                  <li style="white-space: nowrap;width: 60px;overflow: hidden;text-overflow: ellipsis;font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size: 0.8rem;text-align:center">Add news</li>
+            </div>
+            <% @users_story.each do |user| %>
+              <%= link_to user_path(user), style: 'text-decoration:none;color:black;display:flex;flex-direction:column;align-items:center;justify-content:center' do %>
+                <div style="display:flex;align-items:center;flex-direction:column;justify-content:center;margin:0 10px">
+                  <div class="title-avatar" style="position: relative;display: flex;align-items: center;justify-content: center;width:66px;height:66px">
+                    <% if user.image.present? %>
+                      <%= image_tag(user.image, style: 'width:58px;height:58px') %>
+                    <% else %>
+                      <%= image_tag 'default.png', style: 'width: 58px; height: 58px' %>
+                    <% end %>
+                  </div>
+                  <li style="white-space: nowrap;width: 50px;overflow: hidden;text-overflow: ellipsis;font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size: 0.8rem;text-align:center"><%= user.username %></li>
+                </div>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+        <div>
+          <%= render @thank_cards %>
+        </div>
+        <%= will_paginate @thank_cards, renderer: BootstrapPagination::Rails %>
+      </div>
       <div class="feed-section_right">
         <div class="feed-section_right-header">
           <div class="feed-section_right-img">
-            <%= image_tag(current_user.image, width: '52px') if current_user.image.present? %>
+            <% if current_user.image.present? %>
+              <%= image_tag(current_user.image, width: '52px') %>
+            <% else %>
+              <%= image_tag 'default.png', style: 'width: 52px; height: 52px' %>
+            <% end %>
           </div>
 
           <div class="feed-section_right-section-title">
             <div class="feed-section_right-text">
-              <p><%= current_user.name %></p>
+              <p>
+                <%= current_user.name %> 
+                <% if current_user.admin? %>
+                  <i data-visualcompletion="css-img" aria-label="Tài khoản đã xác minh" role="img" style="background-image: url(&quot;https://static.xx.fbcdn.net/rsrc.php/v3/yG/r/AIv5-9MmZfT.png&quot;); background-position: -85px -109px; background-size: auto; width: 12px; height: 12px; background-repeat: no-repeat; display: inline-block;"></i>
+                <% end %>
+              </p>
+                
               <p><%= current_user.username %></p>
             </div>
           </div>
         </div>
 
-        <div class="feed-section_right-section">
-          <p>Another Users</p>
+        <div class="feed-section_right-section" style="align-items: center">
+          <p>別のユーザー</p>
+            <%= link_to "すべて表示", users_path%>
         </div>
-
         <%= render @users %>
-        <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
       </div>
     </div>
-</div>
+  </div>

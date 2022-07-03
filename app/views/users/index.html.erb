@@ -1,0 +1,15 @@
+<% provide(:text_placeholder, 'Search User...') %>
+<% provide(:search, 'name_cont') %>
+<%= render 'shared/header' %>
+<div class="center-user-list">
+  <% if current_user.admin? %>
+    <div style="display: flex; justify-content: center">
+      <%= link_to exports_path(format: :csv),  data: { confirm: 'Do you want export User ?' } do %>
+        <button><%= t("home.index.link_export", locale: :en) %></button>
+      <% end %>
+    </div>
+  <% end %>
+  <p id="notice"><%= notice %></p>
+  <%= render @users %>
+  <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
+</div>
