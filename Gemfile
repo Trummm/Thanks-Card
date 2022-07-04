@@ -5,6 +5,8 @@ ruby '3.0.3'
 
 gem 'active_storage_validations', '0.8.2'
 
+gem "aws-sdk-s3", require: false
+
 gem 'figaro'
 
 gem 'pry-rails'
