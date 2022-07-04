@@ -5,7 +5,7 @@ class User < ApplicationRecord
   
   CSV_ATTRIBUTES = %w(name email phone address).freeze
   VALID_EMAIL_REGEX = /[a-z0-9]+@gmail.com/
-  VALID_PHONE_REGEX = /[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}/
+  # VALID_PHONE_REGEX = /[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}/
   PASSWORD_MIN_LENGTH = 6
 
   before_save { self.email = email.downcase }
@@ -32,7 +32,6 @@ class User < ApplicationRecord
                        unless: :skip_validations_create
 
   validates :phone, presence: true,
-                    format: { with: VALID_PHONE_REGEX },
                     unless: :skip_validations_create
 
   validates :email, presence: true,
