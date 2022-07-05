@@ -66,7 +66,7 @@
 
     <div class="comment">
       <div class="comment-flex">
-        <%= form_with model: @comment, remote: true do |f| %>
+        <%= form_with model: @comment, local: true do |f| %>
           <span class="material-icons">sentiment_satisfied_alt</span>
           <%= f.hidden_field :thank_card_id, value: @thank_card.id %>
           <%= f.text_field :comment, placeholder: "Add Comment" %>

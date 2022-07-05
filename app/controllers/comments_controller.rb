@@ -7,18 +7,9 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @comment.user_id = current_user.id
     if @comment.save
-      respond_to do |format|
-        format.html do
-          flash[:success] = 'Your comment has been posted.'
-          redirect_to @comment
-        end
-        format.js
-      end
+      redirect_to request.referrer 
     else
-      respond_to do |format|
-        format.html { render @comment }
-        format.js { render action: 'failed_save' }
-      end
+      redirect_to :mew
     end
   end
 
