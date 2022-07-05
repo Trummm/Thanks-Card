@@ -23,7 +23,11 @@
                       <%= image_tag 'default.png', style: 'width: 58px; height: 58px' %>
                     <% end %>
                   </div>
-                  <li style="white-space: nowrap;width: 50px;overflow: hidden;text-overflow: ellipsis;font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size: 0.8rem;text-align:center"><%= user.username %></li>
+                  <% if user.username? %>
+                    <li style="white-space: nowrap;width: 50px;overflow: hidden;text-overflow: ellipsis;font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size: 0.8rem;text-align:center"><%= user.username %></li>
+                  <% else %>
+                    <li style="white-space: nowrap;width: 50px;overflow: hidden;text-overflow: ellipsis;font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size: 0.8rem;text-align:center">default</li>
+                  <% end %>
                 </div>
               <% end %>
             <% end %>
