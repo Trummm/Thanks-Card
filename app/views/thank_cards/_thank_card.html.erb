@@ -2,7 +2,7 @@
   .drop-input-checked-detail-<%= thank_card.id %>:checked ~ .hide-list-detail-<%= thank_card.id %>{
     display: block !important;
     transform-origin: top left !important;
-    animation: headerNotifyGrowth ease-in .2s;
+    animation: headerNotifyGrowth2 ease-in .2s;
   }
 
   .drop-input-checked-4-<%= thank_card.id %>:checked ~ .modal-<%= thank_card.id %> {
@@ -12,7 +12,7 @@
     .drop-input-checked-detail-<%= comment.id %>:checked ~ .hide-list-detail-<%= comment.id %>{
       display: block !important;
       transform-origin: calc(100% - 20px) top;
-      animation: headerNotifyGrowth ease-in .2s;
+      animation: headerNotifyGrowth2 ease-in .2s;
     }
   <% end %>
 </style>

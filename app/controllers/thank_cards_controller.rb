@@ -20,13 +20,15 @@ class ThankCardsController < ApplicationController
   def new; end
 
   def create
+    ThankCard.public_activity_off
     @thank_card = current_user.thank_cards.new(thank_card_params)
-    if @thank_card.save
-      flash[:success] = 'Create Success!'
-      redirect_to request.referrer 
-    else
-      render :new
-    end
+      if @thank_card.save
+        flash[:success] = 'Create Success!'
+        redirect_to request.referrer 
+      else
+        render :new
+      end
+    ThankCard.public_activity_on
   end
   
   def edit; end
@@ -55,17 +57,18 @@ class ThankCardsController < ApplicationController
   end
 
   def approved 
-    @thank_card.update_attribute(:approved, true)
-    @thank_card.update_attribute(:created_at, Time.zone.now)
+    @thank_card.update(approved: true, created_at: Time.zone.now)
     flash.now[:success] = 'Approved Success!'
     redirect_to dashboard_path
   end
 
   def approved_destroy
+    ThankCard.public_activity_off
     if @thank_card.destroy
       flash.now[:success] = "Delete Success!"
       redirect_to request.referrer  
     end
+    ThankCard.public_activity_on
   end
   
   private

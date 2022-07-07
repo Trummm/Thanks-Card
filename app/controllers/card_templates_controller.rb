@@ -28,7 +28,7 @@ class CardTemplatesController < ApplicationController
 
   def update
     if @card_template.update(card_params)
-      flash[:success] = 'Profile updated'
+      flash.now[:success] = 'Profile updated'
       redirect_to @card_template
     else
       render :edit
