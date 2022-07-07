@@ -37,43 +37,46 @@
           <% end %>
 
           <p style="margin-left: 20px; margin-right: 20px;"><i>おかげで：</i></p>
+          
+            <%= link_to user_path(thank_card.user_take_thank_card), style:"text-decoration: none;display: flex; align-items: center;" do %>
+              <div class="title-avatar-to" style="position: relative;display: flex;align-items: center;justify-content: center;">
+                <% if thank_card.user_take_thank_card.image.present? %>
+                  <%= image_tag(thank_card.user_take_thank_card.image, width: '20px') %>
+                <% else %>
+                  <%= image_tag 'default.png', style: 'width: 34px; height: 34px' %>
+                <% end %>
+              </div>
+              <h4 class="title-text"><i><%= thank_card.user_take_thank_card.name %></i></h4>
+            <% end %>
 
-          <%= link_to user_path(thank_card.user_take_thank_card), style:"text-decoration: none;display: flex; align-items: center;" do %>
-            <div class="title-avatar-to" style="position: relative;display: flex;align-items: center;justify-content: center;">
-              <% if thank_card.user_take_thank_card.image.present? %>
-                <%= image_tag(thank_card.user_take_thank_card.image, width: '20px') %>
-              <% else %>
-                <%= image_tag 'default.png', style: 'width: 34px; height: 34px' %>
+        </div>  
+
+        <% if current_user?(thank_card.user) %>
+          <label class="drop-detail" style="position: relative; cursor: pointer" for="drop-input-detail-<%= thank_card.id %>">
+            <svg aria-label="Tùy chọn khác" class="_8-yf5 " color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" r="1.5"></circle><circle cx="6" cy="12" r="1.5"></circle><circle cx="18" cy="12" r="1.5"></circle></svg>
+              
+            <input id="drop-input-detail-<%= thank_card.id %>" class="drop-input-checked-detail-<%= thank_card.id %>" hidden="" type="checkbox" />
+
+            <ul style="list-style: none; display: none;width: 130px; position: absolute; z-index: 999; background-color: #fff; list-style: none; padding: 10px; box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3); border-radius: 10px;" class="hide-list-detail-<%= thank_card.id %>">
+              <%= link_to thank_card, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn_delete-users', style: "text-decoration: none; color: black; display: block; margin: 6px 0" do %>
+                <li>Delete</li>
               <% end %>
-            </div>
-            <h4 class="title-text"><i><%= thank_card.user_take_thank_card.name %></i></h4>
-          <% end %>
-        </div>
 
-        <label class="drop-detail" style="position: relative; cursor: pointer" for="drop-input-detail-<%= thank_card.id %>">
-          <svg aria-label="Tùy chọn khác" class="_8-yf5 " color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" r="1.5"></circle><circle cx="6" cy="12" r="1.5"></circle><circle cx="18" cy="12" r="1.5"></circle></svg>
-            
-          <input id="drop-input-detail-<%= thank_card.id %>" class="drop-input-checked-detail-<%= thank_card.id %>" hidden="" type="checkbox" />
+              <label for="drop-input-4-<%= thank_card.id %>">
+                <li>Detail</li>
+              </label>
 
-          <ul style="list-style: none; display: none;width: 130px; position: absolute; z-index: 999; background-color: #fff; list-style: none; padding: 10px; box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3); border-radius: 10px;" class="hide-list-detail-<%= thank_card.id %>">
-            <%= link_to thank_card, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn_delete-users', style: "text-decoration: none; color: black; display: block; margin: 6px 0" do %>
-              <li>Delete</li>
-            <% end %>
-
-            <label for="drop-input-4-<%= thank_card.id %>">
-              <li>Detail</li>
-            </label>
-
-            <%= link_to edit_thank_card_path(thank_card), class: 'btn_delete-users', style: "text-decoration: none; color: black; display: block; margin: 6px 0" do %>
-              <li>Edit</li>
-            <% end %>
-          </ul>
-        </label>
+              <%= link_to edit_thank_card_path(thank_card), class: 'btn_delete-users', style: "text-decoration: none; color: black; display: block; margin: 6px 0" do %>
+                <li>Edit</li>
+              <% end %>
+            </ul>
+          </label>
+        <% end %>
       </div>
 
       <div class="thankscard">
         <div class="card-list-item-show" style="background-image: url( <%= url_for(thank_card.card_template.background) %> )">
-          <div class="card-list-inside-show" style="top: <%= thank_card.card_template.top %>px; right: <%= thank_card.card_template.right %>px; bottom: <%= thank_card.card_template.bottom %>px; left: <%= thank_card.card_template.left %>px">
+          <div class="card-list-inside-show" style="top: <%= thank_card.card_template.top %>px; right: <%= thank_card.card_template.right %>px; bottom: <%= thank_card.card_template.bottom %>px; left: <%= thank_card.card_template.left %>px;word-break: break-all;">
             <%= thank_card.message %>
           </div>
         </div>

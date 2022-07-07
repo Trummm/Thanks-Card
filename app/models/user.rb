@@ -5,7 +5,6 @@ class User < ApplicationRecord
   
   CSV_ATTRIBUTES = %w(name email phone address).freeze
   VALID_EMAIL_REGEX = /[a-z0-9]+@gmail.com/
-  # VALID_PHONE_REGEX = /[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}/
   PASSWORD_MIN_LENGTH = 6
 
   before_save { self.email = email.downcase }
