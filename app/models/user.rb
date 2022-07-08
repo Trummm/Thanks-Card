@@ -7,13 +7,7 @@ class User < ApplicationRecord
   VALID_EMAIL_REGEX = /[a-z0-9]+@gmail.com/
   PASSWORD_MIN_LENGTH = 6
 
-  before_save { self.email = email.downcase }
-
-  scope :search_user, lambda {|search|
-    search&.squish! if search
-    ransack(name_cont: search).result
-  }      
-  
+  before_save { self.email = email.downcase }  
   
   has_secure_password
   has_one_attached :image
