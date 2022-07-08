@@ -55,6 +55,14 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { :host => 'thanks-card-socials.herokuapp.com' }
 
+  ActionMailer::Base.smtp_settings = {
+    address: 'smtp.gmail.com',
+    port: '587',
+    authentication: :plain,
+    user_name: ENV['GMAIL_USERNAME'],
+    password: ENV['GMAIL_PASSWORD'],
+    enable_starttls_auto: true
+  }
 
   config.action_mailer.perform_caching = false
 
