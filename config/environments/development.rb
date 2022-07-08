@@ -44,11 +44,17 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
 
+  config.action_mailer.perform_deliveries = true
+  
+  config.action_mailer.raise_delivery_errors = true
+
+
   host = 'localhost:3000' # Local server
   
-  config.action_mailer.default_url_options = { host: host, protocol: 'http' }
+  # config.action_mailer.default_url_options = { host: host, protocol: 'http' }
 
-  # config.action_mailer.default_url_options = { :host => 'YOURAPPNAME.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'thanks-card-socials.herokuapp.com' }
+
 
   config.action_mailer.perform_caching = false
 
